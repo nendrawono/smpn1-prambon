@@ -3,7 +3,7 @@
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="<?= BASE_URL; ?>" class="h1"><b>SI</b>ABK</a>
+      <a href="<?= BASE_URL; ?>" class="h1"><b>AKU</b>SEKOLAH</a>
     </div>
     <div class="card-body">
       <!-- <p class="login-box-msg">Login</p> -->
