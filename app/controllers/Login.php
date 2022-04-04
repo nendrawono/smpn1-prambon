@@ -5,7 +5,7 @@ class Login extends Controller
     public function index()
     {
         $data = [
-            'title' => 'Login SIABK',
+            'title' => 'Login Aku Sekolah',
         ];
 
         $this->view('login/header', $data);

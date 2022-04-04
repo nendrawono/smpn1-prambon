@@ -113,6 +113,24 @@ const MasterSiswa = function () {
 $(document).ready(function () {
   console.log('master-siswa-js');
 
+  //Date picker
+  $('.datepickers').datetimepicker({
+    format: 'DD/MM/YYYY',
+  });
+
+  // punya wali murid ?
+  $('#memiliki-wali').click(function(){
+    if($(this).is(":checked")){
+      // alert("Checkbox is checked.");
+      $('.wali-murid').removeClass('d-none');
+    }
+    else if($(this).is(":not(:checked)")){
+      // alert("Checkbox is unchecked.");
+      $('.wali-murid').addClass('d-none');
+    }
+  });
+
+
   (function() {
       'use strict';
       window.addEventListener('load', function() {
