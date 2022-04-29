@@ -3,54 +3,7 @@ const MasterKelas = function () {
   // TODO: base url
   var base_url = window.location;
   console.log("BASE_URL => "+base_url);
-
-  // const getUsers = function () {
-  //   $("#tableperencanaan").LoadingOverlay("show", {
-  //     image: "../custom/img/loading2.gif"
-  //   });
-  //   var t = $('#tableperencanaan').DataTable({
-  //     'ajax': {
-  //       'url': '/perencanaan/tableperencanaan',
-  //       'dataSrc': 'data',
-  //       'complete': function () {
-  //         $("#tableperencanaan").LoadingOverlay("hide");
-  //       }
-  //     },
-  //     'columns': [
-  //       { 'render': function (data, type, full, meta) {
-  //         return meta.row +1
-  //       }, className: 'text-center' },
-  //       { 'data': 'perusahaan.badan_usaha', 'name' : 'perusahaan.badan_usaha',  className: 'text-center' },
-  //       { 'data': 'perusahaan.bidang_usaha', 'name' : 'perusahaan.bidang_usaha', className: 'text-center' },
-  //       { 'data': 'perusahaan.lokasi_usaha', 'name' : 'perusahaan.lokasi_usaha', className: 'text-center' },
-  //       { 'data': 'mulai', 'name' : 'mulai', className: 'text-center' },
-  //       { 'data': 'selesai', 'name' : 'selesai', className: 'text-center' },
-  //       { 'data': 'petugas[<br> ]', className: 'text-left' , searchable: false },
-  //       // { 'data': 'lampiran', className: 'text-center', defaultContent: '-' },
-  //       {
-  //         'render': function (data, type, full, meta) {
-  //           var html = '';
-  //           html += '<div class="text-center">';
-  //           html += '<div class="btn-group btn-group-solid">';
-  //           html += '<button class="btn btn-primary btn-raised btn-xs" data-id="' + full["id"] + '" id="btn-show" title="Lihat Data"><i class="fa fa-search"></i></button> &nbsp;';
-  //           html += '<button class="btn btn-primary blue btn-raised btn-xs" data-id="' + full["id"] + '" id="btn-edit" title="Ubah Data"><i class="fa fa-pencil"></i></button> &nbsp;';
-  //           html += '<button class="btn btn-danger btn-raised btn-xs" data-id="' + full["id"] + '" data-nama="' + full["nama_pegawai"] + '" id="btn-hapus" title="Hapus Data"><i class="fa fa-trash"></i></button> &nbsp;';
-  //           // html += '<button class="btn btn-primary btn-raised btn-xs" data-id="' + full["id"] + '" data-nama="' + full["nama_pegawai"] + '" id="btn-approve" title="Approve Data"><i class="fa fa-check"></i></button>';
-  //           html += '</div>';
-  //           html += '</div>';
-  //           return html;
-  //         }, className: 'text-center'
-  //       }
-  //     ],
-  //     "processing": true,
-  //     "serverSide": true,
-  //     "order": [[0, 'desc']],
-  //     "columnDefs": [
-  //       { "orderable": false, "targets": [0] }
-  //     ]
-  //   });
-  // }
-
+  
   const masterdataTables = function () {
     $('#tablekelas').DataTable({
       "paging": true,
@@ -60,6 +13,89 @@ const MasterKelas = function () {
       "info": true,
       "autoWidth": false,
       "responsive": true,
+    });
+  }
+
+  const getMatpel = function () {
+    $.ajax({
+      url: base_url+"/getMatpel",
+      method: "get",
+      dataType: "json",
+      success: function (data) {
+        $.each(data, function(index, values) {
+          var option =  `<option value= "`+values['id']+`" data-nm="`+values['nm_matpel']+`">`+values['nm_matpel']+`</option>`;
+          $("#iselectMatpel").append(option);
+        });
+      },
+    });
+  }
+
+  const getGuru = function () {
+    $.ajax({
+      url: base_url+"/getGuru",
+      method: "get",
+      dataType: "json",
+      success: function (data) {
+        $.each(data, function(index, values) {
+          var option =  `<option value= "`+values['id']+`" data-nm="`+values['nm_guru']+`">`+values['nm_guru']+`</option>`;
+          $("#iselectGuru").append(option);
+        });
+      },
+    });
+  }
+
+  const addToJadwal = function(){
+    var nomer = ($('.row-jadwal').length) ? $('.row-jadwal').length : 0;
+
+    $(document).on('click', '.btn-addMatpel', function(index){
+      nomer = ($('.row-jadwal').length) ? $('.row-jadwal').length : 0;
+      console.log(nomer);
+      nomer++;
+
+      var selectedMatpel = $('#iselectMatpel option').filter(':selected').data('nm');
+      var selectedMatpelID = $('#iselectMatpel option').filter(':selected').val();
+      var selectedJamKe = $('#ijam_ke').val();
+      var selectedJamMulai = $('#ijam_mulai').val();
+      var selectedJamSelesai = $('#ijam_selesai').val();
+      var selectedGuru = $('#iselectGuru option').filter(':selected').data('nm');
+      var selectedGuruID = $('#iselectGuru option').filter(':selected').val();
+
+      var newrow = `<tr class="row-jadwal">
+                    <td class="text-center">
+                      `+selectedJamKe+`
+                      <input type="hidden" name="jam_ke[]" value="`+selectedJamKe+`">
+                    </td>
+                    <td class="text-left">
+                      `+selectedMatpel+`
+                      <input type="hidden" name="matpel_id[]" value="`+selectedMatpelID+`">
+                    </td>
+                    <td class="text-center">
+                      `+selectedJamMulai+`
+                      <input type="hidden" name="jam_mulai[]" value="`+selectedJamMulai+`">
+                    </td>
+                    <td class="text-center">
+                      `+selectedJamSelesai+`
+                      <input type="hidden" name="jam_selesai[]" value="`+selectedJamSelesai+`">
+                    </td>
+                    <td class="text-left">
+                      `+selectedGuru+`
+                      <input type="hidden" name="guru_id[]" value="`+selectedGuruID+`">
+                    </td>
+                    <td class="text-center" width="5%"><button class="btn btn-danger btn-raised btn-xs hapus" id="btn-hapus" title="Hapus Data"><i class="fa fa-trash"></i></button></td>
+                  </tr>`;
+
+      $('#tablejadwal tbody').append(newrow);
+    });
+
+    $(document).on('click', '.hapus', function() {
+      $(this).closest("tr").remove(); //use closest here
+      $('#body-detail tr').each(function(index) {
+        //change id of first tr
+        $(this).find("td:eq(0)").attr("id", "row_num" + (index + 1))
+        //change hidden input value 
+        $(this).find("td:eq(0)").html((index + 1) + '<input type="hidden" name="task_number[]" value=' + (index + 1) + '>')
+      });
+      nomer--;
     });
   }
 
@@ -73,9 +109,193 @@ const MasterKelas = function () {
     });
   }
 
+  const pilihHari = function () {
+    $(document).on('change', '.pilihHari', function(){
+      const id = $(this).data("idkelas");
+      var hari = $('#pilihHari option').filter(':selected').val();
+
+      $("#hariSelected").html(hari);  
+      $(".formAdd").removeClass('d-none'); 
+
+      $("#tablejadwal tbody").empty();
+  
+      $.ajax({
+        url: base_url+"/getjadwal",
+        data: { id: id, hari: hari },
+        method: "post",
+        dataType: "json",
+        success: function (data) {
+
+          $.each(data, function(index, values) {
+            var tr = `<tr class="row-jadwal">
+                    <td class="text-center">
+                      `+values['jam_ke']+`
+                      <input type="hidden" name="jam_ke[]" value="`+values['jam_ke']+`">
+                    </td>
+                    <td class="text-left">
+                      `+values['nm_matpel']+`
+                      <input type="hidden" name="matpel_id[]" value="`+values['matpel_id']+`">
+                    </td>
+                    <td class="text-center">
+                      `+values['jam_mulai']+`
+                      <input type="hidden" name="jam_mulai[]" value="`+values['jam_mulai']+`">
+                    </td>
+                    <td class="text-center">
+                      `+values['jam_selesai']+`
+                      <input type="hidden" name="jam_selesai[]" value="`+values['jam_selesai']+`">
+                    </td>
+                    <td class="text-left">
+                      `+values['nm_guru']+`
+                      <input type="hidden" name="guru_id[]" value="`+values['guru_id']+`">
+                    </td>
+                    <td class="text-center" width="5%"><button class="btn btn-danger btn-raised btn-xs hapus" id="btn-hapus" title="Hapus Data"><i class="fa fa-trash"></i></button></td>
+                  </tr>`;
+
+              $("#tablejadwal tbody").append(tr);
+          });
+
+        },
+      });
+
+    });
+  }
+
+  const lihatJadwal = function () {
+    $(document).on('click', '.lihatJadwal', function(){
+
+      const id = $(this).data("id");      
+      const nmKelas = $(this).data("nm");      
+
+      $(".modal-footer button[type=submit]").html("Simpan Jadwal Pelajaran");
+      $(".modal-content form").attr(
+        "action",
+        base_url+"/lihatJadwal"
+      );
+
+      $('#kelas_id').val(id);
+      $("#lihatJadwalLabel").html("Jadwal Pelajaran Kelas "+nmKelas);
+
+      // $("#list-jadwal").empty();
+
+      var arrHari = ['senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'];   
+      for(var i=0; i<6;i++){
+        
+        // alert("hari => "+ arrHari[i]);
+
+        $.ajax({
+          url: base_url+"/lihatjadwal",
+          data: { id: id, hari: arrHari[i] },
+          method: "post",
+          dataType: "json",
+          async: false,
+          success: function (data) {
+
+
+            var countSpan = data.length;
+            var rowSpan = 'rowspan="'+countSpan+'"';
+            var fristTD = '<td class="tg-0pky text-center" '+rowSpan+' style="vertical-align: middle;" >'+arrHari[i]+'</td>';
+            // alert(data.length);
+
+            // if(data.length == 0){
+            //   rowSpan='<td class="tg-0pky text-center" style="vertical-align: middle;" >'+arrHari[i]+'</td>';
+            //   var row = `<tr>
+            //               `+rowSpan+`
+            //               <td class="tg-0pky text-center">-</td>
+            //               <td class="tg-0pky text-center">-</td>
+            //               <td class="tg-0pky text-center">-</td>
+            //             </tr>`;
+
+            //   $("#list-jadwal").append(row);
+            // }
+
+            // if(data.length > 1){
+            //   rowSpan='<td class="tg-0pky text-center" style="vertical-align: middle;" >'+arrHari[i]+'</td>';
+            // }
+
+            $.each(data, function(index, values) {
+
+                var row = `<tr>
+                          `+fristTD+`
+                          <td class="tg-0pky text-center">`+data[index].nm_matpel+`</td>
+                          <td class="tg-0pky text-center">`+data[index].jam_mulai+` - `+data[index].jam_selesai+`</td>
+                          <td class="tg-0pky text-center">`+data[index].nm_guru+`</td>
+                        </tr>`;
+  
+                $("#list-jadwal").append(row);
+
+                fristTD='';
+            });
+
+            rowSpan
+  
+          },
+        });
+      }   
+    });
+  }
+
+  const aturJadwal = function () {
+    $(document).on('click', '.aturJadwal', function(){
+
+      const id = $(this).data("id");
+      const nmKelas = $(this).data("nm");
+      
+
+      $(".modal-footer button[type=submit]").html("Simpan Jadwal Pelajaran");
+      $(".modal-content form").attr(
+        "action",
+        base_url+"/simpanJadwal"
+      );
+
+      $('#pilihHari').attr('data-idKelas', id);
+      $('#kelas_id').val(id);
+      $("#aturJadwalLabel").html("Pengaturan Jadwal Kelas "+nmKelas);  
+      $("#tablejadwal tbody").empty();
+  
+    });
+  }
+
+  const simpanJadwal = function () {
+    $(document).on('click', '#simpan-jadwal', function(){
+
+      alert("simpan");
+      // const id = $(this).data("idkelas");
+      // var hari = $('#pilihHari option').filter(':selected').val();
+
+      // $("#hariSelected").html(hari);  
+      // $(".formAdd").removeClass('d-none'); 
+
+      // $("#tablejadwal tbody").empty();
+  
+      // $.ajax({
+      //   url: base_url+"/getjadwal",
+      //   data: { id: id, hari: hari },
+      //   method: "post",
+      //   dataType: "json",
+      //   success: function (data) {
+
+      //     $.each(data, function(index, values) {
+      //       var tr = `<tr class="row-jadwal">
+      //               <td class="text-center">`+values['jam_ke']+`</td>
+      //               <td class="text-left">`+values['nm_matpel']+`</td>
+      //               <td class="text-center">`+values['jam_mulai']+`</td>
+      //               <td class="text-center">`+values['jam_selesai']+`</td>
+      //               <td class="text-left">`+values['nm_guru']+`</td>
+      //               <td class="text-center" width="5%"><button class="btn btn-danger btn-raised btn-xs hapus" id="btn-hapus" title="Hapus Data"><i class="fa fa-trash"></i></button></td>
+      //             </tr>`;
+
+      //         $("#tablejadwal tbody").append(tr);
+      //     });
+
+      //   },
+      // });
+
+    });
+  }
+
   const ubahKelas = function () {
       $(document).on('click', '.tampilModalUbah', function(){
-      $("#staticBackdropLabel").html("Ubah Data User");  
+      $("#staticBackdropLabel").html("Ubah Data Kelas");  
       $(".modal-footer button[type=submit]").html("Ubah Data");  
       $(".modal-content form").attr(
         "action",
@@ -91,10 +311,10 @@ const MasterKelas = function () {
         dataType: "json",
         success: function (data) {
           $("#nm_kelas").val(data.nm_kelas);
-          $("#jenis_kelas").val(data.jenis_kelas);
           $("#id").val(data.id);
         },
       });
+
     });
   }
 
@@ -104,6 +324,13 @@ const MasterKelas = function () {
       masterdataTables();
       tambahKelas();
       ubahKelas();
+      aturJadwal();
+      pilihHari();
+      getMatpel();
+      getGuru();
+      addToJadwal();
+      simpanJadwal();
+      lihatJadwal();
     }
   };
 
@@ -136,7 +363,7 @@ $(document).ready(function () {
     }
   });
   $.fn.dataTable.ext.errMode = 'none';
-  MasterUser.init();
+  MasterKelas.init();
 });
 
 

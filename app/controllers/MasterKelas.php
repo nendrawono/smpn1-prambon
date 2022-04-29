@@ -30,6 +30,21 @@ class MasterKelas extends Controller
         exit;
     }
 
+    public function simpanJadwal()
+    {
+        $datetime = date('Y-m-d H:i:s');
+        $_POST['created_at'] = $datetime;
+        $_POST['updated_at'] = $datetime;
+        
+        if ($this->model('KelasModel')->simpanJadwalKelas($_POST) > 0) {
+            Flasher::setFlash('Jadwal Kelas telah berhasil ditambahkan.');
+        } else {
+            Flasher::setFlash('Jadwal Kelas gagal ditambahkan.', 'danger');
+        }
+        header('Location: ' . BASE_URL . '/masterkelas');
+        exit;
+    }
+
     public function delete($id)
     {
         if (isset($_POST['_method'])) {
@@ -51,6 +66,26 @@ class MasterKelas extends Controller
     public function getUbah()
     {
         echo json_encode($this->model('KelasModel')->getKelasByID($_POST['id']));
+    }
+
+    public function getJadwal()
+    {
+        echo json_encode($this->model('KelasModel')->getJadwalByID($_POST));
+    }
+
+    public function lihatJadwal()
+    {
+        echo json_encode($this->model('KelasModel')->lihatJadwalByID($_POST));
+    }
+
+    public function getMatpel()
+    {
+        echo json_encode($this->model('MatpelModel')->getAllMatpel());
+    }
+
+    public function getGuru()
+    {
+        echo json_encode($this->model('GuruModel')->getAllGuru());
     }
 
     public function ubah()

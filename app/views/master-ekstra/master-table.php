@@ -7,11 +7,11 @@
       </div>
     </div>
     <div class="card-body">
-      <table id="tableuser" class="table table-bordered table-striped">
+      <table id="tableekstra" class="table table-bordered table-striped">
         <thead>
           <tr>
             <th style="width: 5%">#</th>
-            <th>Nama Ekstrakurikuler</th>
+            <th>Nama Bakat Minat</th>
             <th>Aksi</th>
           </tr>
         </thead>

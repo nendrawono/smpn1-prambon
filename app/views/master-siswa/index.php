@@ -3,7 +3,7 @@
   <div class="container-fluid">
     <!-- <div class="row"> -->
 
-    <div class="row">
+   <div class="row">
         <div class="col-lg-12">
             <?php Flasher::flash(); ?>
         </div>
@@ -12,6 +12,8 @@
     <?php 
       include 'master-table.php'; 
       include 'master-form.php'; 
+      include 'master-prestasi.php'; 
+      include 'master-guru-pendamping.php'; 
       include 'master-detail.php'; 
     ?>
 

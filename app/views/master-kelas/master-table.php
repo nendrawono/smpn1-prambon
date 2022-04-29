@@ -7,12 +7,12 @@
       </div>
     </div>
     <div class="card-body">
-      <table id="tableuser" class="table table-bordered table-striped">
+      <table id="tablekelas" class="table table-bordered table-striped">
         <thead>
           <tr>
             <th style="width: 5%">#</th>
             <th>Kelas</th>
-            <th>Aksi</th>
+            <th class="text-center">Aksi</th>
           </tr>
         </thead>
           <?php $i = 1; ?>
@@ -20,7 +20,18 @@
               <tr>
                   <th scope="row"><?= $i++; ?></th>
                   <td><?= $o['nm_kelas']; ?></td>
-                  <td>
+                  <td class="text-center" width="20%">
+                    <div class="dropdown d-inline">
+                          <button class="btn  btn-default btn-sm dropdown-toggle" data-toggle="dropdown" style="height:38px">
+                              <i class="fa fa-bars"></i>
+                          </button>
+                          <ul class="dropdown-menu dropdown-menu-right">
+                            <li>
+                              <a href="#" class="dropdown-item lihatJadwal" data-toggle="modal" data-target="#lihatJadwal" data-id="<?= $o['id']; ?>" data-nm="<?= $o['nm_kelas']; ?>" title="Lihat Jadwal">Lihat Jadwal</a>
+                              <a href="#" class="dropdown-item aturJadwal" data-toggle="modal" data-target="#aturJadwal" data-id="<?= $o['id']; ?>" data-nm="<?= $o['nm_kelas']; ?>" title="Atur Jadwal">Atur Jadwal</a>
+                            </li>
+                          </ul>
+                      </div>
                       <button type="button" class="btn btn-warning tampilModalUbah" data-toggle="modal" data-target="#staticBackdrop" data-id="<?= $o['id']; ?>"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                               <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                               <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />

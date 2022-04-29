@@ -18,7 +18,7 @@ const MasterEkstra = function () {
 
   const tambahEkstra = function () {
     $(document).on('click', '.tampilModalTambah', function(){
-      $("#staticBackdropLabel").html("Tambah Data Ekstrakurikuler");  
+      $("#staticBackdropLabel").html("Tambah Data Bakat Minat");  
       $(".modal-footer button[type=submit]").html("Simpan Data");
   
       $("#nm_ekstra").val("");

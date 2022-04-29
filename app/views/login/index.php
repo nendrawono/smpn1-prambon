@@ -7,7 +7,6 @@
     </div>
     <div class="card-body">
       <!-- <p class="login-box-msg">Login</p> -->
-
       <form action="../../index3.html" method="post">
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="NIS">

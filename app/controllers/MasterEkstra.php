@@ -6,7 +6,7 @@ class MasterEkstra extends Controller
     {
         $data = [
             'title' => 'Master',
-            'title_page' => 'Data Master Ekstrakurikuler',
+            'title_page' => 'Data Master Bakat Minat',
             'ekstra' => $this->model('EkstraModel')->getAllEkstra()
         ];
 
@@ -22,9 +22,9 @@ class MasterEkstra extends Controller
         $_POST['created_at'] = $datetime;
         $_POST['updated_at'] = $datetime;
         if ($this->model('EkstraModel')->tambahDataEkstra($_POST) > 0) {
-            Flasher::setFlash('Data Ekstrakurikuler telah berhasil ditambahkan.');
+            Flasher::setFlash('Data Bakat Minat telah berhasil ditambahkan.');
         } else {
-            Flasher::setFlash('Data Ekstrakurikuler gagal ditambahkan.', 'danger');
+            Flasher::setFlash('Data Bakat Minat gagal ditambahkan.', 'danger');
         }
         header('Location: ' . BASE_URL . '/masterekstra');
         exit;
@@ -37,9 +37,9 @@ class MasterEkstra extends Controller
             $_POST['deleted_at'] = $datetime;
             $_POST['id'] = $id;
             if ($this->model('EkstraModel')->deleteEkstra($_POST) > 0) {
-                Flasher::setFlash('Data Ekstrakurikuler telah berhasil dihapus.');
+                Flasher::setFlash('Data Bakat Minat telah berhasil dihapus.');
             } else {
-                Flasher::setFlash('Data Ekstrakurikuler gagal dihapus.', 'danger');
+                Flasher::setFlash('Data Bakat Minat gagal dihapus.', 'danger');
             }
             header('Location: ' . BASE_URL . '/masterekstra');
             exit;
@@ -58,9 +58,9 @@ class MasterEkstra extends Controller
         $datetime = date('Y-m-d H:i:s');
         $_POST['updated_at'] = $datetime;
         if ($this->model('EkstraModel')->ubahDataEkstra($_POST) > 0) {
-            Flasher::setFlash('Data Ekstrakurikuler telah berhasil diubah.');
+            Flasher::setFlash('Data Bakat Minat telah berhasil diubah.');
         } else {
-            Flasher::setFlash('Data Ekstrakurikuler gagal diubah.', 'danger');
+            Flasher::setFlash('Data Bakat Minat gagal diubah.', 'danger');
         }
         header('Location: ' . BASE_URL . '/masterekstra');
         exit;

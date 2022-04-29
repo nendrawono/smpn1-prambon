@@ -19,14 +19,12 @@ class MatpelModel
 
     public function tambahDataMatpel($data)
     {
-        $query = "INSERT INTO $this->table (kelas_id, nm_pelajaran, kkm, deskripsi, kelompok, created_at, updated_at)
-                    VALUES (:kelas_id, :nm_pelajaran, :kkm, :deskripsi, :kelompok ,:created_at, :updated_at)";
+        $query = "INSERT INTO $this->table (nm_matpel, kkm, kelompok, created_at, updated_at)
+        VALUES (:nm_matpel, :kkm, :kelompok, :created_at, :updated_at)";
 
         $this->db->query($query);
-        $this->db->bind('kelas_id', $data['kelas_id']);
-        $this->db->bind('nm_pelajaran', $data['nm_pelajaran']);
+        $this->db->bind('nm_matpel', $data['nm_matpel']);
         $this->db->bind('kkm', $data['kkm']);
-        $this->db->bind('deskripsi', $data['deskripsi']);
         $this->db->bind('kelompok', $data['kelompok']);
         $this->db->bind('created_at', $data['created_at']);
         $this->db->bind('updated_at', $data['updated_at']);
@@ -59,21 +57,19 @@ class MatpelModel
     public function ubahDataMatpel($data)
     {
         $query = "UPDATE $this->table SET 
-                    kelas_id = :kelas_id,
-                    nm_pelajaran = :nm_pelajaran,
+                    nm_matpel = :nm_matpel,
                     kkm = :kkm,
-                    deskripsi = :deskripsi,
                     kelompok = :kelompok,
                     updated_at = :updated_at
                 WHERE id = :id";
 
         $this->db->query($query);
-        $this->db->bind('kelas_id', $data['kelas_id']);
-        $this->db->bind('nm_pelajaran', $data['nm_pelajaran']);
+        $this->db->bind('nm_matpel', $data['nm_matpel']);
         $this->db->bind('kkm', $data['kkm']);
-        $this->db->bind('deskripsi', $data['deskripsi']);
         $this->db->bind('kelompok', $data['kelompok']);
+        $this->db->bind('updated_at', $data['updated_at']);
         $this->db->bind('id', $data['id']);
+        
 
         $this->db->execute();
         return $this->db->rowCount();
@@ -81,9 +77,9 @@ class MatpelModel
 
     public function searchMatpel($keyword)
     {
-        $query = "SELECT * FROM $this->table WHERE nm_pelajaran LIKE :nm_pelajaran";
+        $query = "SELECT * FROM $this->table WHERE nm_matpel LIKE :nm_matpel";
         $this->db->query($query);
-        $this->db->bind('nm_pelajaran', '%' . $keyword . '%');
+        $this->db->bind('nm_matpel', '%' . $keyword . '%');
         return $this->db->getAllData();
     }
 }

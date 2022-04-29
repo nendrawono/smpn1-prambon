@@ -10,7 +10,7 @@
       <form action="<?= BASE_URL; ?>/mastermatpel/tambah" class="needs-validation" method="POST" novalidate>
       <div class="modal-body">
         <input type="hidden" class="form-control" name="id" id="id">
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label>Minimal</label>
           <select class="form-control select2" style="width: 100%;">
             <option>Alabama</option>
@@ -21,7 +21,7 @@
             <option>Texas</option>
             <option>Washington</option>
           </select>
-        </div>
+        </div> -->
         <div class="form-group">
           <label>Nama Mata Pelajaran</label>
           <input type="text" class="form-control" name="nm_matpel" id="nm_matpel" placeholder="Nama Mata Pelajaran" required>
@@ -29,6 +29,23 @@
               Nama Mata Pelajaran tidak boleh kosong.
           </div>
         </div>
+
+        <div class="form-group">
+          <label>KKM</label>
+          <input type="number" class="form-control" name="kkm" id="kkm" placeholder="KKM" required>
+          <div class="invalid-feedback">
+              KKM tidak boleh kosong.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Kelompok Mata Pelajaran</label>
+          <input type="text" class="form-control" name="kelompok" id="kelompok" placeholder="A, B, C" required>
+          <div class="invalid-feedback">
+              Kelompok Mata Pelajaran tidak boleh kosong.
+          </div>
+        </div>
+
       </div>
       <div class="modal-footer justify-content-between">
         <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>

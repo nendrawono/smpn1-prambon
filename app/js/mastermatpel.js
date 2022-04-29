@@ -46,8 +46,9 @@ const MasterMatpel = function () {
         method: "post",
         dataType: "json",
         success: function (data) {
-          $("#nm_kelas").val(data.nm_kelas);
-          $("#jenis_kelas").val(data.jenis_kelas);
+          $("#nm_matpel").val(data.nm_matpel);
+          $("#kkm").val(data.kkm);
+          $("#kelompok").val(data.kelompok);
           $("#id").val(data.id);
         },
       });

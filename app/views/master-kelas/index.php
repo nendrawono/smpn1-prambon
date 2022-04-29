@@ -12,6 +12,8 @@
     <?php 
       include 'master-table.php'; 
       include 'master-form.php'; 
+      include 'atur-jadwal.php'; 
+      include 'lihat-jadwal.php'; 
     ?>
 
   </div>

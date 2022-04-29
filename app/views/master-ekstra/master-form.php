@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="staticBackdropLabel">Form Tambah Ekstrakurikuler</h4>
+        <h4 class="modal-title" id="staticBackdropLabel">Form Tambah Bakat Minat</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -11,10 +11,10 @@
       <div class="modal-body">
         <input type="hidden" class="form-control" name="id" id="id">
             <div class="form-group">
-              <label>Ekstrakurikuler</label>
-              <input type="text" class="form-control" name="nm_ekstra" id="nm_ekstra" placeholder="Ekstrakurikuler" required>
+              <label>Bakat Minat</label>
+              <input type="text" class="form-control" name="nm_ekstra" id="nm_ekstra" placeholder="Bakat Minat" required>
               <div class="invalid-feedback">
-                Ekstrakurikuler tidak boleh kosong.
+                Bakat Minat tidak boleh kosong.
               </div>
             </div>
       </div>

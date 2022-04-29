@@ -13,7 +13,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="dist/img/users.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">USERS</a>
@@ -49,6 +49,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="<?= BASE_URL; ?>/masterguru" class="nav-link <?= ($data['title_page'] == "Data Master Guru" ? 'active' : '') ?> ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>GURU</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="<?= BASE_URL; ?>/mastersiswa" class="nav-link <?= ($data['title_page'] == "Data Master Siswa" ? 'active' : '') ?> ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>SISWA</p>
@@ -67,12 +73,21 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?= BASE_URL; ?>/masterekstra" class="nav-link <?= ($data['title_page'] == "Data Master Ekstrakurikuler" ? 'active' : '') ?> ">
+                <a href="<?= BASE_URL; ?>/masterekstra" class="nav-link <?= ($data['title_page'] == "Data Master Bakat Minat" ? 'active' : '') ?> ">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>EKSTRAKURIKULER</p>
+                  <p>BAKAT MINAT</p>
                 </a>
               </li>
             </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                INPUT HARIAN
+                <span class="badge badge-info right">2</span>
+              </p>
+            </a>
           </li>
           <li class="nav-header">RAPOR SISWA</li>
           <li class="nav-item">
@@ -84,9 +99,33 @@
               </p>
             </a>
           </li>
+          <li class="nav-header">PENGATURAN</li>
+          <li class="nav-item <?= ($data['title'] == "Pegaturan" ? 'menu-is-opening menu-open' : '') ?>">
+            <a href="<?= BASE_URL; ?>/pengaturantahunajaran" class="nav-link <?= ($data['title_page'] == "Tahun Ajaran" ? 'active' : '') ?> ">
+              <i class="nav-icon fas fa-cog"></i>
+              <p>
+                TAHUN AJARAN
+              </p>
+            </a>
+          </li>
+           <li class="nav-item <?= ($data['title'] == "Pegaturan" ? 'menu-is-opening menu-open' : '') ?>">
+            <!-- <a href="<?= BASE_URL; ?>/dashboard" class="nav-link "> -->
+            <a href="<?= BASE_URL; ?>/masterpengumuman" class="nav-link <?= ($data['title_page'] == "Pengumuman" ? 'active' : '') ?> ">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                PENGUMUMAN
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
   </aside>
+
+  
+    
+  <?php 
+    // include 'modal-tahun-ajaran.php'; 
+  ?>

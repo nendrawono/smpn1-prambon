@@ -18,6 +18,7 @@ class MasterMatpel extends Controller
 
     public function tambah()
     {
+
         $datetime = date('Y-m-d H:i:s');
         $_POST['created_at'] = $datetime;
         $_POST['updated_at'] = $datetime;
@@ -57,6 +58,7 @@ class MasterMatpel extends Controller
     {
         $datetime = date('Y-m-d H:i:s');
         $_POST['updated_at'] = $datetime;
+        
         if ($this->model('MatpelModel')->ubahDataMatpel($_POST) > 0) {
             Flasher::setFlash('Data Mata Pelajaran telah berhasil diubah.');
         } else {
