@@ -27,7 +27,7 @@
                           </button>
                           <ul class="dropdown-menu dropdown-menu-right">
                             <li>
-                              <a href="#" class="dropdown-item lihatPeserta" data-toggle="modal" data-target="#lihatPeserta" data-id="<?= $o['id']; ?>" data-nm="<?= $o['nm_kelas']; ?>" title="Lihat Jadwal">Lihat Peserta</a>
+                              <a href="#" class="dropdown-item lihatPeserta" data-toggle="modal" data-target="#lihatPeserta" data-id="<?= $o['id']; ?>" data-nm="<?= $o['nm_ekstra']; ?>" title="Lihat Jadwal">Lihat Peserta</a>
                               <a href="#" class="dropdown-item ubahPeserta" data-toggle="modal" data-target="#ubahPeserta" data-id="<?= $o['id']; ?>" data-nm="<?= $o['nm_ekstra']; ?>" title="Atur Jadwal">Tambah/Ubah Peserta</a>
                             </li>
                           </ul>

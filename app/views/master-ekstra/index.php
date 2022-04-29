@@ -13,6 +13,7 @@
       include 'master-table.php'; 
       include 'master-form.php'; 
       include 'ubah-peserta.php'; 
+      include 'lihat-peserta.php'; 
     ?>
 
   </div>

@@ -161,6 +161,53 @@ const MasterEkstra = function () {
     });
   }
 
+  const lihatPeserta = function () {
+      $(document).on('click', '.lihatPeserta', function(){
+
+      const id = $(this).data("id");
+      $("#ekstra_id").val(id);
+      const nm_ekstra = $(this).data("nm");
+
+      $("#lihatPesertaLabel").html("Peserta Bakat Minat " + nm_ekstra);  
+      // $(".modal-footer button[type=submit]").html("Ubah Data");  
+      $(".modal-content form").attr(
+        "action",
+        base_url+"/ubahpeserta"
+      );
+
+      $("#tableLihatPeserta tbody").empty();
+
+      $.ajax({
+        url: base_url+"/getubahpeserta",
+        data: { id: id },
+        method: "post",
+        dataType: "json",
+        success: function (data) {
+          console.log(data);
+          var n=1;
+          $.each(data, function(index, values) {
+            var tr = `<tr class="row-peserta">
+                    <td class="text-center">
+                      `+ n++ +`
+                      <input type="hidden" name="siswa_id[]" value="`+values['id']+`">
+                    </td>
+                    <td class="text-left">
+                      `+values['nm_siswa']+`
+                      <input type="hidden" name="siswa_id[]" value="`+values['id']+`">
+                    </td>
+                    <td class="text-left">
+                      `+values['nm_kelas']+`
+                      <input type="hidden" name="nm_kelas[]" value="`+values['nm_kelas']+`">
+                    </td>
+                  </tr>`;
+
+              $("#tableLihatPeserta tbody").append(tr);
+          });
+        },
+      });
+    });
+  }
+
   return {
     init: function () {
     
@@ -169,6 +216,7 @@ const MasterEkstra = function () {
       ubahEkstra();
       ubahPeserta();
       addToPeserta();
+      lihatPeserta();
     }
   };
 
