@@ -21,6 +21,17 @@
                   <th scope="row"><?= $i++; ?></th>
                   <td><?= $o['nm_ekstra']; ?></td>
                   <td>
+                    <div class="dropdown d-inline">
+                          <button class="btn  btn-default btn-sm dropdown-toggle" data-toggle="dropdown" style="height:38px">
+                              <i class="fa fa-bars"></i>
+                          </button>
+                          <ul class="dropdown-menu dropdown-menu-right">
+                            <li>
+                              <a href="#" class="dropdown-item lihatPeserta" data-toggle="modal" data-target="#lihatPeserta" data-id="<?= $o['id']; ?>" data-nm="<?= $o['nm_kelas']; ?>" title="Lihat Jadwal">Lihat Peserta</a>
+                              <a href="#" class="dropdown-item ubahPeserta" data-toggle="modal" data-target="#ubahPeserta" data-id="<?= $o['id']; ?>" data-nm="<?= $o['nm_ekstra']; ?>" title="Atur Jadwal">Tambah/Ubah Peserta</a>
+                            </li>
+                          </ul>
+                      </div>
                       <button type="button" class="btn btn-warning tampilModalUbah" data-toggle="modal" data-target="#staticBackdrop" data-id="<?= $o['id']; ?>"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                               <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                               <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />

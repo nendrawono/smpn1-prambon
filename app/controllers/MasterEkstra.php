@@ -53,6 +53,16 @@ class MasterEkstra extends Controller
         echo json_encode($this->model('EkstraModel')->getEkstraByID($_POST['id']));
     }
 
+    public function getUbahPeserta()
+    {
+        echo json_encode($this->model('EkstraModel')->getPesertaByID($_POST));
+    }
+
+    public function getSelect2Peserta()
+    {
+        echo json_encode($this->model('EkstraModel')->getSelect2Peserta($_POST));
+    }
+
     public function ubah()
     {
         $datetime = date('Y-m-d H:i:s');
@@ -61,6 +71,19 @@ class MasterEkstra extends Controller
             Flasher::setFlash('Data Bakat Minat telah berhasil diubah.');
         } else {
             Flasher::setFlash('Data Bakat Minat gagal diubah.', 'danger');
+        }
+        header('Location: ' . BASE_URL . '/masterekstra');
+        exit;
+    }
+
+    public function ubahPeserta()
+    {
+        $datetime = date('Y-m-d H:i:s');
+        $_POST['updated_at'] = $datetime;
+        if ($this->model('EkstraModel')->ubahDataPeserta($_POST) > 0) {
+            Flasher::setFlash('Data Peserta Bakat Minat telah berhasil diubah.');
+        } else {
+            Flasher::setFlash('Data Peserta Bakat Minat gagal diubah.', 'danger');
         }
         header('Location: ' . BASE_URL . '/masterekstra');
         exit;

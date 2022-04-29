@@ -175,7 +175,7 @@ const MasterKelas = function () {
       $('#kelas_id').val(id);
       $("#lihatJadwalLabel").html("Jadwal Pelajaran Kelas "+nmKelas);
 
-      // $("#list-jadwal").empty();
+      $("#list-jadwal").empty();
 
       var arrHari = ['senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'];   
       for(var i=0; i<6;i++){
