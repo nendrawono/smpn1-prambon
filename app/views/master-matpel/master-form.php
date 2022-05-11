@@ -46,6 +46,15 @@
           </div>
         </div>
 
+        <div class="form-group">
+          <label>Deskripsi</label>
+          <textarea class="form-control" rows="5" name="deskripsi" id="deskripsi" placeholder=" " required> </textarea>
+          <!-- <input type="text" class="form-control" name="deskripsi" id="deskripsi" placeholder=" " required> -->
+          <div class="invalid-feedback">
+              Deskeipsi tidak boleh kosong.
+          </div>
+        </div>
+
       </div>
       <div class="modal-footer justify-content-between">
         <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>

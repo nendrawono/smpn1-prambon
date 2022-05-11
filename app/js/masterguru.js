@@ -23,10 +23,11 @@ const MasterGuru = function () {
 
       $('#nip').prop('readonly', false);
   
+      $("#id").val("");
       $("#nip").val("");
       $("#nm_guru").val("");
       $("#alamat_guru").val("");
-      $("#jabatan").val("");
+      $("#jabatan_id").val("");
     });
   }
 
@@ -52,7 +53,7 @@ const MasterGuru = function () {
           $("#nip").val(data.nip);
           $("#nm_guru").val(data.nm_guru);
           $("#alamat_guru").val(data.alamat_guru);
-          $("#jabatan").val(data.jabatan);
+          $("#jabatan_id").val(data.jabatan_id);
         },
       });
     });

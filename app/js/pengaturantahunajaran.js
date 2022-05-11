@@ -23,6 +23,7 @@ const PengaturanTahunAjaran = function () {
   
       $("#tahun_ajaran").val("");
       $("#semester").val("");
+      $("#is_active").val("");
     });
   }
 
@@ -45,6 +46,7 @@ const PengaturanTahunAjaran = function () {
         success: function (data) {
           $("#tahun_ajaran").val(data.tahun_ajaran);
           $("#semester").val(data.semester);
+          $("#is_active").val(data.is_active);
           $("#id").val(data.id);
         },
       });

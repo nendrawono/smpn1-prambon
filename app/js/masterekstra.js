@@ -22,6 +22,8 @@ const MasterEkstra = function () {
       $(".modal-footer button[type=submit]").html("Simpan Data");
   
       $("#nm_ekstra").val("");
+      $("#id").val("");
+
     });
   }
 
@@ -169,7 +171,6 @@ const MasterEkstra = function () {
       const nm_ekstra = $(this).data("nm");
 
       $("#lihatPesertaLabel").html("Peserta Bakat Minat " + nm_ekstra);  
-      // $(".modal-footer button[type=submit]").html("Ubah Data");  
       $(".modal-content form").attr(
         "action",
         base_url+"/ubahpeserta"

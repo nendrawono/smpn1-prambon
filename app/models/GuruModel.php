@@ -12,22 +12,33 @@ class GuruModel
 
     public function getAllGuru()
     {
-        $query = 'SELECT * FROM ' . $this->table . ' WHERE deleted_at IS NULL';
+        $query = 'SELECT G.*, J.nm_jabatan
+                    FROM GURU G 
+                    join jabatan J on G.jabatan_id = J.id
+                    WHERE G.NIP != 0 AND G.deleted_at IS null';
+        $this->db->query($query);
+        return $this->db->getAllData();
+    }
+
+    public function getAllJabatan()
+    {
+        $query = 'SELECT * FROM jabatan WHERE deleted_at IS NULL';
         $this->db->query($query);
         return $this->db->getAllData();
     }
 
     public function tambahDataGuru($data)
     {
-        $query = "INSERT INTO $this->table (id, nip, nm_guru, alamat_guru, jabatan, created_at, updated_at)
-                    VALUES (:id ,:nip, :nm_guru, :alamat_guru, :jabatan, :created_at, :updated_at)";
+        $query = "INSERT INTO $this->table (id, nip, nm_guru, alamat_guru, jabatan_id, created_at, updated_at)
+                    VALUES (:id ,:nip, :nm_guru, :alamat_guru, :jabatan_id, :created_at, :updated_at)";
+
 
         $this->db->query($query);
         $this->db->bind('id', $data['nip']);
         $this->db->bind('nip', $data['nip']);
         $this->db->bind('nm_guru', $data['nm_guru']);
         $this->db->bind('alamat_guru', $data['alamat_guru']);
-        $this->db->bind('jabatan', $data['jabatan']);
+        $this->db->bind('jabatan_id', $data['jabatan_id']);
         $this->db->bind('created_at', $data['created_at']);
         $this->db->bind('updated_at', $data['updated_at']);
         
@@ -63,14 +74,14 @@ class GuruModel
         $query = "UPDATE $this->table SET 
                     nm_guru = :nm_guru, 
                     alamat_guru = :alamat_guru, 
-                    jabatan = :jabatan,
+                    jabatan_id = :jabatan_id,
                     updated_at = :updated_at
                 WHERE id = :id";
 
         $this->db->query($query);
         $this->db->bind('nm_guru', $data['nm_guru']);
         $this->db->bind('alamat_guru', $data['alamat_guru']);
-        $this->db->bind('jabatan', $data['jabatan']);
+        $this->db->bind('jabatan_id', $data['jabatan_id']);
         $this->db->bind('updated_at', $data['updated_at']);
         $this->db->bind('id', $data['id']);
 

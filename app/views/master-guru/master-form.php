@@ -31,12 +31,14 @@
                   Alamat tidak boleh kosong.
               </div>
             </div>
+
             <div class="form-group">
               <label>Jabatan Saat Ini</label>
-              <input type="text" class="form-control" name="jabatan" id="jabatan" placeholder="Jabatan Guru" required>
-              <div class="invalid-feedback">
-                  Jabatan tidak boleh kosong.
-              </div>
+              <select class="form-control select2" id="jabatan_id" name="jabatan_id" style="width: 100%;">
+                <?php foreach ($data['jabatan'] as $o) : ?>
+                  <option value="<?= $o['id']; ?>"><?= $o['nm_jabatan']; ?></option>
+                <?php endforeach; ?>
+              </select>
             </div>
       </div>
       <div class="modal-footer justify-content-between">

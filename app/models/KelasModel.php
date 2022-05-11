@@ -12,18 +12,24 @@ class KelasModel
 
     public function getAllKelas()
     {
-        $query = 'SELECT * FROM ' . $this->table . ' WHERE deleted_at IS NULL';
+        // $query = 'SELECT * FROM ' . $this->table . ' WHERE deleted_at IS NULL';
+        $query  = 'select K.*, G.nip, G.nm_guru 
+                    from kelas K
+                    join guru G on K.wali_kelas_id = G.id
+                    where K.deleted_at is null ';
+
         $this->db->query($query);
         return $this->db->getAllData();
     }
 
     public function tambahDataKelas($data)
     {
-        $query = "INSERT INTO $this->table (nm_kelas, status, created_at, updated_at)
-                    VALUES (:nm_kelas, :status, :created_at, :updated_at)";
+        $query = "INSERT INTO $this->table (nm_kelas, wali_kelas_id, status, created_at, updated_at)
+                    VALUES (:nm_kelas, :wali_kelas_id, :status, :created_at, :updated_at)";
 
         $this->db->query($query);
         $this->db->bind('nm_kelas', $data['nm_kelas']);
+        $this->db->bind('wali_kelas_id', $data['wali_kelas_id']);
         $this->db->bind('status', '1');
         $this->db->bind('created_at', $data['created_at']);
         $this->db->bind('updated_at', $data['updated_at']);
@@ -136,11 +142,13 @@ class KelasModel
     {
         $query = "UPDATE $this->table SET 
                     nm_kelas = :nm_kelas,
+                    wali_kelas_id = :wali_kelas_id,
                     updated_at = :updated_at
                 WHERE id = :id";
 
         $this->db->query($query);
         $this->db->bind('nm_kelas', $data['nm_kelas']);
+        $this->db->bind('wali_kelas_id', $data['wali_kelas_id']);        
         $this->db->bind('updated_at', $data['updated_at']);
         $this->db->bind('id', $data['id']);
 

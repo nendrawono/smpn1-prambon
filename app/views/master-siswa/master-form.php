@@ -164,7 +164,7 @@
               </div>
             </div>  -->
 
-             <div class="form-group">
+            <div class="form-group">
               <label>Diterima Disekolah Ini Dikelas</label>
               <select class="form-control select2bs4" name="kelas_id" id="kelas_id" style="width: 100%;">
                 <?php foreach ($data['select2_kelas'] as $i => $o) : ?>

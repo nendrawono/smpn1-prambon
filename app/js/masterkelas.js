@@ -106,6 +106,8 @@ const MasterKelas = function () {
   
       $("#nm_kelas").val("");
       $("#jenis_kelas").val("");
+      $("#id").val("");
+
     });
   }
 
@@ -310,8 +312,10 @@ const MasterKelas = function () {
         method: "post",
         dataType: "json",
         success: function (data) {
+          console.log(data);
           $("#nm_kelas").val(data.nm_kelas);
           $("#id").val(data.id);
+          $("#wali_kelas_id").val(data.wali_kelas_id);
         },
       });
 
@@ -338,6 +342,11 @@ const MasterKelas = function () {
 
 $(document).ready(function () {
   console.log('master-kelas-js');
+
+  //Initialize Select2 Elements
+  $('.select2bs4').select2({
+    theme: 'bootstrap4'
+  });
 
   (function() {
       'use strict';

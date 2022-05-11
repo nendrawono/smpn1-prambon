@@ -19,13 +19,14 @@ class MatpelModel
 
     public function tambahDataMatpel($data)
     {
-        $query = "INSERT INTO $this->table (nm_matpel, kkm, kelompok, created_at, updated_at)
-        VALUES (:nm_matpel, :kkm, :kelompok, :created_at, :updated_at)";
+        $query = "INSERT INTO $this->table (nm_matpel, kkm, kelompok, deskripsi, created_at, updated_at)
+        VALUES (:nm_matpel, :kkm, :kelompok,deskripsi , :created_at, :updated_at)";
 
         $this->db->query($query);
         $this->db->bind('nm_matpel', $data['nm_matpel']);
         $this->db->bind('kkm', $data['kkm']);
         $this->db->bind('kelompok', $data['kelompok']);
+        $this->db->bind('deskripsi', $data['deskripsi']);
         $this->db->bind('created_at', $data['created_at']);
         $this->db->bind('updated_at', $data['updated_at']);
 
@@ -60,6 +61,7 @@ class MatpelModel
                     nm_matpel = :nm_matpel,
                     kkm = :kkm,
                     kelompok = :kelompok,
+                    deskripsi = :deskripsi,
                     updated_at = :updated_at
                 WHERE id = :id";
 
@@ -67,6 +69,7 @@ class MatpelModel
         $this->db->bind('nm_matpel', $data['nm_matpel']);
         $this->db->bind('kkm', $data['kkm']);
         $this->db->bind('kelompok', $data['kelompok']);
+        $this->db->bind('deskripsi', $data['deskripsi']);
         $this->db->bind('updated_at', $data['updated_at']);
         $this->db->bind('id', $data['id']);
         

@@ -12,6 +12,7 @@
           <tr>
             <th style="width: 5%">#</th>
             <th>Kelas</th>
+            <th>Wali Kelas</th>
             <th class="text-center">Aksi</th>
           </tr>
         </thead>
@@ -20,6 +21,7 @@
               <tr>
                   <th scope="row"><?= $i++; ?></th>
                   <td><?= $o['nm_kelas']; ?></td>
+                  <td><?= $o['nm_guru']; ?></td>
                   <td class="text-center" width="20%">
                     <div class="dropdown d-inline">
                           <button class="btn  btn-default btn-sm dropdown-toggle" data-toggle="dropdown" style="height:38px">

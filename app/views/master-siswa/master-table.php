@@ -57,7 +57,7 @@
                               <a href="#" class="dropdown-item guruPendampingSiswa" data-toggle="modal" data-target="#guruPendampingSiswa" data-id="<?= $o['id']; ?>" data-guru="<?= $o['guru_pendamping_sekarang']; ?>" data-nmsiswa="<?= $o['nm_siswa']; ?>">Guru Pendamping</a>
                             </li>
                             <li>
-                              <a href="#" class="dropdown-item tampilModalUbah" id="tampilModalUbah" data-toggle="modal" data-target="#staticBackdrop" data-id="<?= $o['id']; ?>">Isi Rapot</a>
+                              <a href="mastersiswa/raport/<?= $o['id']; ?>/2" class="dropdown-item" data-id="<?= $o['id'];  ?> ">Isi Rapot</a>
                             </li>
                           </ul>
                       </div>

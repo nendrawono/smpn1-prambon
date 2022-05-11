@@ -1,4 +1,9 @@
 <section class="content">   
+    <?php 
+        // var_dump($_SESSION["user_login"]) 
+        // print("<pre>".print_r($_SESSION["user_login"],true)."</pre>");
+        echo $_SESSION["user_login"]['siswa']['nm_siswa'];
+    ?>
     <div class="row">
         <div class="col-md-6">
             <div class="card">

@@ -9,6 +9,15 @@ class UserModel
     {
         $this->db = new Database;
     }
+    
+    public function validasiLogin($data)
+    {
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE username = :username AND password= :password AND deleted_at IS NULL';
+        $this->db->query($query);
+        $this->db->bind('username', $data['username']);
+        $this->db->bind('password', $data['password']);
+        return $this->db->getFirstData();
+    }
 
     public function getAllUser()
     {

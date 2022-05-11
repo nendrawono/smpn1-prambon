@@ -7,7 +7,8 @@ class MasterGuru extends Controller
         $data = [
             'title' => 'Master',
             'title_page' => 'Data Master Guru',
-            'guru' => $this->model('GuruModel')->getAllGuru()
+            'guru' => $this->model('GuruModel')->getAllGuru(),
+            'jabatan' => $this->model('GuruModel')->getAllJabatan()
         ];
 
         $this->view('templates/header', $data);

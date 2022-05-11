@@ -7,9 +7,9 @@
     </div>
     <div class="card-body">
       <!-- <p class="login-box-msg">Login</p> -->
-      <form action="../../index3.html" method="post">
+      <form action="<?= BASE_URL; ?>/login/validasiLogin" method="post">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="NIS">
+          <input type="text" class="form-control" name="username" placeholder="NIS">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -17,7 +17,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="password" class="form-control" name="password" placeholder="Password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -36,6 +36,7 @@
           <!-- /.col -->
           <div class="col-12">
             <a href="<?= BASE_URL; ?>/dashboard" class="btn btn-primary btn-block" role="button">Masuk</a>
+            <!-- <button type="submit" class="btn btn-primary btn-block">Masuk</button> -->
           </div>
           <!-- /.col -->
         </div>

@@ -24,6 +24,13 @@
                 Tahun Ajaran tidak boleh kosong.
               </div>
             </div>
+            <div class="form-group">
+              <label>Tahun Ajaran Aktif Saat Ini ?</label>
+              <select class="form-control select2" id="is_active" name="is_active" style="width: 100%;">
+                <option value="0">Tidak</option>
+                <option value="1">Ya</option>
+              </select>
+            </div>
       </div>
       <div class="modal-footer justify-content-between">
         <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>

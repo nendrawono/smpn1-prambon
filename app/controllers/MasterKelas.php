@@ -7,7 +7,8 @@ class MasterKelas extends Controller
         $data = [
             'title' => 'Master',
             'title_page' => 'Data Master Kelas',
-            'kelas' => $this->model('KelasModel')->getAllKelas()
+            'kelas' => $this->model('KelasModel')->getAllKelas(),
+            'select2_guru' => $this->model('SiswaModel')->getAllGuru()
         ];
 
         $this->view('templates/header', $data);

@@ -32,23 +32,30 @@ const MasterMatpel = function () {
   const ubahMatpel = function () {
       $(document).on('click', '.tampilModalUbah', function(){
       $("#staticBackdropLabel").html("Ubah Data Mata Pelajaran");  
-      $(".modal-footer button[type=submit]").html("Ubah Data");  
+      $(".modal-footer button[type=submit]").html("Ubah Data"); 
+      
+
       $(".modal-content form").attr(
         "action",
         base_url+"/ubah"
       );
   
       const id = $(this).data("id");
-  
+
       $.ajax({
         url: base_url+"/getubah",
         data: { id: id },
         method: "post",
         dataType: "json",
         success: function (data) {
+          alert("sukses");
+
+
+          console.log(data);
           $("#nm_matpel").val(data.nm_matpel);
           $("#kkm").val(data.kkm);
           $("#kelompok").val(data.kelompok);
+          $("#deskripsi").val(data.deskripsi);
           $("#id").val(data.id);
         },
       });
@@ -68,6 +75,13 @@ const MasterMatpel = function () {
 
 $(document).ready(function () {
   console.log('master-matpel-js');
+
+  // $(".content_deskripsi").hide();
+  // $(".show_hide").on("click", function () {
+  //     var txt = $(".content_deskripsi").is(':visible') ? 'Baca selengkapnya' : 'Baca Lebih Sedikit';
+  //     $(".show_hide").text(txt);
+  //     $(this).next('.content_deskripsi').slideToggle(200);
+  // });
 
    //Initialize Select2 Elements
    $('.select2').select2({

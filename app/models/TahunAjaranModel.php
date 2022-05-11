@@ -12,7 +12,7 @@ class TahunAjaranModel
 
     public function getAllTahunAjaran()
     {
-        $query = 'SELECT * FROM ' . $this->table . ' WHERE deleted_at IS NULL';
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE deleted_at IS NULL ORDER BY created_at ASC ';
         $this->db->query($query);
         return $this->db->getAllData();
     }
@@ -60,12 +60,14 @@ class TahunAjaranModel
         $query = "UPDATE $this->table SET 
                     tahun_ajaran = :tahun_ajaran,
                     semester = :semester,
+                    is_active = :is_active,
                     updated_at = :updated_at
                 WHERE id = :id";
 
         $this->db->query($query);
         $this->db->bind('tahun_ajaran', $data['tahun_ajaran']);
         $this->db->bind('semester', $data['semester']);
+        $this->db->bind('is_active', $data['is_active']);
         $this->db->bind('updated_at', $data['updated_at']);
         $this->db->bind('id', $data['id']);
 
@@ -79,5 +81,13 @@ class TahunAjaranModel
         $this->db->query($query);
         $this->db->bind('tahun_ajaran', '%' . $keyword . '%');
         return $this->db->getAllData();
+    }
+
+    public function getTahunAjaranActive()
+    {
+        $query = "SELECT tahun_ajaran, semester FROM $this->table WHERE is_active=:active AND deleted_at IS NULL";
+        $this->db->query($query);
+        $this->db->bind('active', 1);
+        return $this->db->getFirstData();
     }
 }

@@ -207,6 +207,106 @@ const MasterSiswa = function () {
     });
   }
 
+  const inputNilai = function () {
+      $(document).on('change', '.nilai', function(){
+
+
+      // console.log($(this).next().next().next());
+      console.log($(this).val());
+      
+      var nilaix = $(this).val();
+      
+      var konv = konversiNilai(nilaix);
+
+      $(this).closest('.text-center')
+      .next('.text-center, :has(.text-center)')
+      .find('.predikat').val(konv);
+
+      $(this).closest('.text-center')
+      .next('.text-center, :has(.text-center)')
+      .find('.lbl-predikat').text(konv);
+
+      // console.log(selector);
+      // #table-sikap-spiritual > tbody > tr:nth-child(2) > td:nth-child(5) > input
+
+
+
+    });
+  }
+
+  const konversiNilai = function (nilaix) {
+
+    var hitung = nilaix/100*4;
+
+    if(hitung >= 4.0){
+        return "A";
+    }else if(hitung >= 3.6){
+        return "A-";
+    }else if(hitung >= 3.3){
+        return "B+";
+    }else if(hitung >= 3.0){
+        return "B";
+    }else if(hitung >= 2.6){
+        return "B-";
+    }else if(hitung >= 2.3){
+        return "C+";
+    }else if(hitung >= 2.0){
+        return "C";
+    }else if(hitung >= 1.6){
+        return "C-";
+    }else if(hitung >= 1.3){
+        return "D+";
+    }else if(hitung >= 1.0){
+        return "D";
+    }else if(hitung < 1.0){
+        return "D";
+    }
+    else{
+      return "#";
+    }
+
+    // switch(hitung) {
+    //   case 4.0:
+    //      return "A";
+    //     break;
+    //   case 3.6:
+    //       return "A-";
+    //     break;
+    //   case 3.3:
+    //       return "B+";
+    //     break;
+    //   case 3.0:
+    //     return "B";
+    //     break;
+    //   case 2.6:
+    //     return "B-";
+    //     break;
+    //   case 2.3:
+    //     return "C+";
+    //     break;
+    //   case 2.0:
+    //     return "C";
+    //     break;
+    //   case 1.6:
+    //     return "C-";
+    //     break;
+    //   case 1.3:
+    //     return "D+";
+    //     break;
+    //   case 1.0:
+    //     return "D";
+    //     break;
+        
+    //   default:
+    //     // code block
+    // }
+
+     
+
+    return hitung; 
+
+  }
+
   const dateViewFormat = function (stringDate) {
     var date    = new Date(stringDate),
     yr      = date.getFullYear(),
@@ -361,6 +461,7 @@ const MasterSiswa = function () {
       simpanJadwal();
       detailSiswa();
       guruPendamping();
+      inputNilai();
     }
   };
 

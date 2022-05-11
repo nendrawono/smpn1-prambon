@@ -7,6 +7,9 @@ define('BASE_DIST', 'http://localhost/smpn1-prambon/public/dist');
 define('BASE_JS', 'http://localhost/smpn1-prambon/app/js');
 define('DIR_UPLOAD_IMG', 'img/');
 
+
+// session_start();
+
 //db config
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'skrip-dit');

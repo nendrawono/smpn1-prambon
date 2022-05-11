@@ -9,13 +9,21 @@
       </div>
       <form action="<?= BASE_URL; ?>/masterkelas/tambah" class="needs-validation" method="POST" novalidate>
       <div class="modal-body">
-        <input type="hidden" class="form-control" name="id" id="id">
-            <div class="form-group">
-              <label>Kelas</label>
-              <input type="text" class="form-control" name="nm_kelas" id="nm_kelas" placeholder="Kelas" required>
-              <div class="invalid-feedback">
-                  Kelas tidak boleh kosong.
-              </div>
+          <input type="hidden" class="form-control" name="id" id="id">
+          <div class="form-group">
+            <label>Kelas</label>
+            <input type="text" class="form-control" name="nm_kelas" id="nm_kelas" placeholder="Kelas" required>
+            <div class="invalid-feedback">
+                Kelas tidak boleh kosong.
+            </div>
+          </div>
+          <div class="form-group">
+              <label>Wali Kelas</label>
+              <select class="form-control select2bs4" name="wali_kelas_id" id="wali_kelas_id" style="width: 100%;">
+                <?php foreach ($data['select2_guru'] as $i => $o) : ?>
+                  <option value="<?= $o['id']; ?>"><?= $o['nm_guru']; ?></option>
+                <?php endforeach; ?>
+              </select>
             </div>
       </div>
       <div class="modal-footer justify-content-between">
