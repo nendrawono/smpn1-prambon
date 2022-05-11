@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 29 Apr 2022 pada 18.54
+-- Waktu pembuatan: 11 Bulan Mei 2022 pada 16.17
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.4.10
 
@@ -47,7 +47,8 @@ INSERT INTO `detail_ekstra` (`id`, `siswa_id`, `ekstra_id`, `created_at`, `updat
 (21, 52, 1, NULL, '2022-04-29 11:47:55', NULL),
 (23, 67, 2, NULL, '2022-04-29 11:48:26', NULL),
 (24, 7, 2, NULL, '2022-04-29 11:48:26', NULL),
-(25, 62, 7, NULL, '2022-04-29 11:49:03', NULL);
+(26, 62, 7, NULL, '2022-05-07 01:03:17', NULL),
+(27, 1535010089, 7, NULL, '2022-05-07 01:03:17', NULL);
 
 -- --------------------------------------------------------
 
@@ -87,7 +88,7 @@ CREATE TABLE `guru` (
   `nip` varchar(255) DEFAULT NULL,
   `nm_guru` varchar(255) DEFAULT NULL,
   `alamat_guru` varchar(255) DEFAULT NULL,
-  `jabatan` varchar(255) DEFAULT NULL,
+  `jabatan_id` varchar(255) DEFAULT '',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -97,10 +98,34 @@ CREATE TABLE `guru` (
 -- Dumping data untuk tabel `guru`
 --
 
-INSERT INTO `guru` (`id`, `nip`, `nm_guru`, `alamat_guru`, `jabatan`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(0, '0', '-', '-', '-', '0000-00-00 00:00:00', NULL, NULL),
-(1535001181, '1535001181', 'guru 1', 'Ducimus minima reic', 'Quae voluptatem Et ', '2022-04-24 08:34:20', '2022-04-24 15:12:03', NULL),
-(2147483647, '15340134381', 'Guru 2', 'Jl. Guru 2', 'Guru Matpel', '2022-04-26 12:02:56', '2022-04-26 12:02:56', NULL);
+INSERT INTO `guru` (`id`, `nip`, `nm_guru`, `alamat_guru`, `jabatan_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(0, '0', '-', '-', '-', '0000-00-00 00:00:00', '2022-05-07 06:10:30', NULL),
+(1535001181, '1535001181', 'GURU 1', 'Jl. Sebelah Sekolahan no 2', '3', '2022-04-24 08:34:20', '2022-05-07 05:48:33', NULL),
+(1535010073, '1535010073', 'AKU KEPALA SEKOLAH S. Pdi,P', 'Jl. Bapak Kepala Sekolah no 32', '1', '2022-05-07 00:36:36', '2022-05-07 06:02:04', NULL),
+(2147483647, '15340134381', 'Guru 2', 'Jl. Guru 2', '3', '2022-04-26 12:02:56', '2022-05-07 05:48:35', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `jabatan`
+--
+
+CREATE TABLE `jabatan` (
+  `id` int(11) NOT NULL,
+  `nm_jabatan` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `jabatan`
+--
+
+INSERT INTO `jabatan` (`id`, `nm_jabatan`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'KEPALA SEKOLAH', '2022-05-07 05:38:23', '2022-05-07 06:02:26', NULL),
+(2, 'GURU BP', '2022-05-07 05:38:41', '2022-05-07 05:38:45', NULL),
+(3, 'GURU MATAPELAJARAN', '2022-05-07 05:39:08', '2022-05-07 05:39:11', NULL);
 
 -- --------------------------------------------------------
 
@@ -144,6 +169,7 @@ INSERT INTO `jadwal_kelas` (`id`, `hari`, `jam_ke`, `jam_mulai`, `jam_selesai`, 
 CREATE TABLE `kelas` (
   `id` int(11) NOT NULL,
   `nm_kelas` varchar(255) DEFAULT NULL,
+  `wali_kelas_id` int(11) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
@@ -154,14 +180,13 @@ CREATE TABLE `kelas` (
 -- Dumping data untuk tabel `kelas`
 --
 
-INSERT INTO `kelas` (`id`, `nm_kelas`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'VII-A', '1', '2022-03-04 07:51:55', '2022-04-26 15:56:16', NULL),
-(2, 'VII-B', '1', '2022-03-04 02:23:45', '2022-04-24 09:45:33', NULL),
-(3, 'VII-C', '1', '2022-03-23 12:52:12', '2022-04-24 09:45:38', NULL),
-(4, 'SA', '1', '2022-03-23 07:46:42', '2022-03-23 13:46:45', '2022-03-23 07:46:45'),
-(5, 'a', '1', '2022-04-07 00:13:26', '2022-04-07 05:13:29', '2022-04-07 00:13:29'),
-(6, 'VIII-A', '1', '2022-04-24 09:28:52', '2022-04-24 09:45:46', NULL),
-(7, 'IX-A', '1', '2022-04-24 09:29:02', '2022-04-24 09:29:02', NULL);
+INSERT INTO `kelas` (`id`, `nm_kelas`, `wali_kelas_id`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'VII-A', 1535001181, '1', '2022-03-04 07:51:55', '2022-05-09 08:13:34', NULL),
+(2, 'VII-B', 1535001181, '1', '2022-03-04 02:23:45', '2022-05-09 08:13:35', NULL),
+(3, 'VII-C', 1535010073, '1', '2022-03-23 12:52:12', '2022-05-09 08:14:17', NULL),
+(6, 'VIII-A', 1535001181, '1', '2022-04-24 09:28:52', '2022-05-09 08:13:41', NULL),
+(7, 'IX-A', 1535010073, '1', '2022-04-24 09:29:02', '2022-05-09 08:14:16', NULL),
+(9, 'X', 1535010073, '1', '2022-05-09 03:29:58', '2022-05-09 08:34:03', '2022-05-09 03:34:03');
 
 -- --------------------------------------------------------
 
@@ -174,6 +199,7 @@ CREATE TABLE `matpel` (
   `nm_matpel` varchar(255) DEFAULT '',
   `kkm` int(11) DEFAULT NULL,
   `kelompok` varchar(2) DEFAULT '',
+  `deskripsi` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -183,15 +209,11 @@ CREATE TABLE `matpel` (
 -- Dumping data untuk tabel `matpel`
 --
 
-INSERT INTO `matpel` (`id`, `nm_matpel`, `kkm`, `kelompok`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'BAHASA INDONESIA', 0, 'A', '2022-03-23 13:11:55', '2022-04-07 05:14:20', '2022-04-07 00:14:20'),
-(2, 'ILMU PENGETAHUAN ALAM', 0, 'A', NULL, '2022-04-07 05:14:17', '2022-04-07 00:14:17'),
-(3, 'SENI BUDAYA', 0, 'B', NULL, '2022-04-07 05:14:13', '2022-04-07 00:14:13'),
-(4, 'a', 10, 'a', '2022-04-05 01:56:29', '2022-04-05 06:56:56', '2022-04-05 01:56:56'),
-(5, 'Ilmu Pengetahuan Alam', 29, 'As', '2022-04-05 01:57:36', '2022-04-26 11:35:12', NULL),
-(6, 'Bahasa Indonesia', 80, 'A', '2022-04-23 16:16:29', '2022-04-23 16:16:29', NULL),
-(7, 'Bahasa Inggris', 75, 'B', '2022-04-26 11:35:27', '2022-04-26 11:35:27', NULL),
-(8, 'Seni Budaya', 80, 'C', '2022-04-26 11:35:40', '2022-04-26 11:35:40', NULL);
+INSERT INTO `matpel` (`id`, `nm_matpel`, `kkm`, `kelompok`, `deskripsi`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(5, 'Ilmu Pengetahuan Alam', 80, 'A', 'Deskripsi', '2022-04-05 01:57:36', '2022-05-01 12:59:29', NULL),
+(6, 'Bahasa Indonesia', 80, 'A', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2022-04-23 16:16:29', '2022-05-01 17:28:09', NULL),
+(7, 'Bahasa Inggris', 75, 'B', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2022-04-26 11:35:27', '2022-05-01 17:28:11', NULL),
+(8, 'Seni Budaya', 80, 'C', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2022-04-26 11:35:40', '2022-05-01 17:28:12', NULL);
 
 -- --------------------------------------------------------
 
@@ -282,6 +304,99 @@ INSERT INTO `prestasi` (`id`, `siswa_id`, `prestasi`, `created_at`, `updated_at`
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `raport`
+--
+
+CREATE TABLE `raport` (
+  `id` int(11) NOT NULL,
+  `siswa_id` int(11) DEFAULT NULL,
+  `kelas_id` int(11) DEFAULT NULL,
+  `tahun_ajaran_id` int(11) DEFAULT NULL,
+  `spiritual_pred` text DEFAULT NULL,
+  `spiritual_des` text DEFAULT NULL,
+  `sosial_pred` text DEFAULT NULL,
+  `sosial_des` text DEFAULT NULL,
+  `sakit` int(11) DEFAULT NULL,
+  `ijin` int(11) DEFAULT NULL,
+  `tanpa_keterangan` int(11) DEFAULT NULL,
+  `membaca` text DEFAULT NULL,
+  `menghitung` text DEFAULT NULL,
+  `prilaku` text DEFAULT NULL,
+  `disiplin` text DEFAULT NULL,
+  `kerja_keras` text DEFAULT NULL,
+  `kreatif` text DEFAULT NULL,
+  `mandiri` text DEFAULT NULL,
+  `rasa_ingin_tau` text DEFAULT NULL,
+  `tanggung_jawab` text DEFAULT NULL,
+  `kepala_sekolah_id` int(11) DEFAULT NULL,
+  `wali_kelas_id` int(11) DEFAULT NULL,
+  `koor_inklusif_id` int(11) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `raport`
+--
+
+INSERT INTO `raport` (`id`, `siswa_id`, `kelas_id`, `tahun_ajaran_id`, `spiritual_pred`, `spiritual_des`, `sosial_pred`, `sosial_des`, `sakit`, `ijin`, `tanpa_keterangan`, `membaca`, `menghitung`, `prilaku`, `disiplin`, `kerja_keras`, `kreatif`, `mandiri`, `rasa_ingin_tau`, `tanggung_jawab`, `kepala_sekolah_id`, `wali_kelas_id`, `koor_inklusif_id`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(11, 1535010089, 1, 2, 'abcde', 'abcde', 'abcde', 'abcde', 1, 2, 4, 'abcde', 'abcde', 'abcde', 'abcde', 'abcde', 'abcde', 'abcde', 'abcde', 'abcde', 1535010073, 1535001181, 1535001181, 'draft', '2022-05-09 14:56:10', '2022-05-09 14:58:13', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `raport_ekstra`
+--
+
+CREATE TABLE `raport_ekstra` (
+  `id` int(11) NOT NULL,
+  `raport_id` int(11) DEFAULT NULL,
+  `ekstra_id` int(11) DEFAULT NULL,
+  `keterangan` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `raport_ekstra`
+--
+
+INSERT INTO `raport_ekstra` (`id`, `raport_id`, `ekstra_id`, `keterangan`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 11, 7, 'esport dengan baik', '2022-05-09 15:00:35', '2022-05-09 15:00:39', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `raport_matpel`
+--
+
+CREATE TABLE `raport_matpel` (
+  `id` int(11) NOT NULL,
+  `raport_id` int(11) DEFAULT NULL,
+  `mapel_id` int(11) DEFAULT NULL,
+  `nilai` varchar(255) DEFAULT NULL,
+  `predikat` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `raport_matpel`
+--
+
+INSERT INTO `raport_matpel` (`id`, `raport_id`, `mapel_id`, `nilai`, `predikat`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 11, 5, '100', 'A', '2022-05-09 15:01:41', NULL, NULL),
+(2, 11, 6, '90', 'B', '2022-05-09 15:02:02', NULL, NULL),
+(3, 11, 7, '80', 'B+', '2022-05-09 15:02:26', NULL, NULL),
+(4, 11, 8, '60', 'C', '2022-05-09 15:02:54', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `siswa`
 --
 
@@ -326,11 +441,12 @@ CREATE TABLE `siswa` (
 --
 
 INSERT INTO `siswa` (`id`, `nis`, `kelas_id`, `nm_siswa`, `tempat_lahir`, `tgl_lahir`, `jenis_kelamin`, `alamat`, `agama`, `status_dalam_keluarga`, `anak_ke`, `tlp`, `sekolah_asal`, `diterima_dikelas`, `diterima_tgl`, `nm_ayah`, `nm_ibu`, `alamat_ortu`, `tlp_ortu`, `pekerjaan_ayah`, `pekerjaan_ibu`, `nm_wali`, `alamat_wali`, `tlp_wali`, `pekerjaan_wali`, `reff_passfoto`, `original_passfoto`, `kelas_sekarang`, `guru_pendamping_sekarang`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(7, '7', 7, 'SUWANDI', 'SURABAYA', '1970-01-01', 'L', 'Harum nulla aspernat', 'Sit voluptatibus cu', 'Velit ut eum commodi', 'Fuga Voluptas natus', '65', 'Necessitatibus ipsum', '7', '2022-03-01', 'Dolor et sunt volupt', 'Neque temporibus cil', 'Quidem veniam dolor', '96', 'Labore aliquid ea su', 'Itaque unde officia ', '', '', '', '', 'img/7.jpg', NULL, 7, '1535001181', 1, '2022-04-26 12:05:22', '2022-04-29 16:00:34', NULL),
+(7, '7', 2, 'SUWANDI', 'SURABAYA', '2002-01-05', 'L', 'JL. ALAMAT PESERTA DIDIK 24 BLCOK A', 'ISLAM', 'KANDUNG', '1', '0831343837483', 'SDN NEGERI 1', '2', '2022-01-31', 'NAMA AYAH', 'NAMA IBU', 'JL. ALMAT ORTU', '031503433', 'WIRASWASTA', 'IBU RUMAH TANGGA', 'NAMA WALINYA', 'JL. WALI MURID', '031503412', 'SWASTA', 'img/7.jpg', NULL, 7, '1535001181', 1, '2022-04-26 12:05:22', '2022-05-01 11:55:49', NULL),
 (35, '35', 1, 'REZA', 'SURABAYA', '1969-12-31', 'L', 'Ex provident mollit', 'Numquam odit eos nes', 'Amet cumque officia', 'Harum praesentium te', '39', 'Non eiusmod aute non', NULL, '2022-08-01', 'Dignissimos vel qui ', 'Beatae eu ex reicien', 'Neque neque possimus', '81', 'Qui ullam voluptas a', 'Rerum in reprehender', '', '', '', '', 'img/35.jpg', NULL, 1, '0', 1, '2022-04-24 07:56:58', '2022-04-29 16:00:38', NULL),
 (52, '52', 3, 'YUNI', 'MAGETAN', '2022-04-06', 'P', 'Aut deserunt in sed ', 'Quia deleniti volupt', 'Quos nostrud tempora', 'Deleniti dicta culpa', '89', 'Sunt pariatur Mini', NULL, '1970-01-01', 'Laudantium impedit', 'Magna duis sed id d', 'Molestias nulla vel ', '74', 'Dolore vel eligendi ', 'Modi qui non illum ', 'Ducimus fugit veni', 'Deleniti nulla sequi', '85', 'Officiis harum conse', 'img/52.jpg', NULL, 3, '0', 1, '2022-04-26 12:04:31', '2022-04-29 16:00:59', '2022-04-26 12:04:42'),
 (62, '62', 7, 'WONO', 'MOJOKERTO', '1970-01-01', 'P', 'Est non laboris mod', 'Aut consequatur maio', 'Adipisci explicabo ', 'Expedita ipsum iusto', '12', 'Rerum ipsum aperiam ', NULL, '1970-01-01', 'Rerum harum dolorum ', 'Labore quia est fugi', 'A in numquam earum a', '47', 'Suscipit cum molesti', 'Non culpa odio est f', 'Voluptatum impedit ', 'Quis cupidatat ex vo', '67', 'Nostrum quisquam vol', 'img/62.jpg', NULL, 7, '0', 1, '2022-04-28 14:37:28', '2022-04-29 16:00:53', NULL),
-(67, '67', 6, 'KAILA', 'PROBOLINGGO', '2022-04-28', 'L', 'Et iure irure omnis ', 'Ipsa debitis sint n', 'Ex qui perspiciatis', 'Doloremque adipisci ', '1', 'Unde quis iure esse ', NULL, '2022-04-01', 'Sit in modi temporib', 'Natus explicabo Qui', 'Soluta quae sunt acc', '56', 'Veniam aut irure du', 'Exercitationem volup', 'In minima neque non ', 'Quasi laborum Ipsa', '78', 'Culpa qui id moles', 'img/67.jpg', NULL, 6, '0', 1, '2022-04-28 02:18:12', '2022-04-29 16:01:02', NULL);
+(67, '67', 6, 'KAILA', 'PROBOLINGGO', '2022-04-28', 'L', 'Et iure irure omnis ', 'Ipsa debitis sint n', 'Ex qui perspiciatis', 'Doloremque adipisci ', '1', 'Unde quis iure esse ', NULL, '2022-04-01', 'Sit in modi temporib', 'Natus explicabo Qui', 'Soluta quae sunt acc', '56', 'Veniam aut irure du', 'Exercitationem volup', 'In minima neque non ', 'Quasi laborum Ipsa', '78', 'Culpa qui id moles', 'img/67.jpg', NULL, 6, '0', 1, '2022-04-28 02:18:12', '2022-04-29 16:01:02', NULL),
+(1535010089, '1535010089', 1, 'DIDIT AURYAN IM', 'SIDOARJO', '1997-07-05', 'L', 'Jl. GPA NO 43', 'ISLAM', 'KANDUNG', '1', '0315043433', 'SDN NEGERI 11', '1', '2022-01-01', 'AYAH DIDIT', 'IBU DIDIT', 'JL. GPA NO 25', '0315022222', 'PNS', 'IBU RUMAH TANGGA', '', '', '', '', 'img/1535010089.jpg', NULL, 1, '1535001181', 1, '2022-05-07 00:30:35', '2022-05-07 09:11:04', NULL);
 
 -- --------------------------------------------------------
 
@@ -342,6 +458,7 @@ CREATE TABLE `tahun_ajaran` (
   `id` int(11) NOT NULL,
   `tahun_ajaran` varchar(255) DEFAULT NULL,
   `semester` varchar(255) DEFAULT NULL,
+  `is_active` int(11) DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -351,10 +468,10 @@ CREATE TABLE `tahun_ajaran` (
 -- Dumping data untuk tabel `tahun_ajaran`
 --
 
-INSERT INTO `tahun_ajaran` (`id`, `tahun_ajaran`, `semester`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, '2019-2022', '1', '2022-04-28 06:44:26', '2022-04-29 02:27:17', NULL),
-(2, '2021 - 2022', '2', '2022-04-28 06:44:44', '2022-04-28 06:44:45', NULL),
-(3, '2018 - 2019', '1', '2022-04-29 02:26:36', '2022-04-29 02:26:36', NULL);
+INSERT INTO `tahun_ajaran` (`id`, `tahun_ajaran`, `semester`, `is_active`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, '2019-2022', '1', 0, '2022-04-28 06:44:26', '2022-04-29 02:27:17', NULL),
+(2, '2021 - 2022', '2', 1, '2022-04-28 06:44:44', '2022-05-07 00:22:55', NULL),
+(3, '2018 - 2019', '1', 0, '2022-04-29 02:26:36', '2022-04-29 02:26:36', NULL);
 
 -- --------------------------------------------------------
 
@@ -379,19 +496,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `siswa_id`, `status`, `created_at`, `updated_at`, `deleted_at`, `id_role`) VALUES
-(1, 'wono', 'wono123', NULL, 1, '0000-00-00 00:00:00', '2022-04-23 20:01:24', '2022-04-23 15:01:24', NULL),
-(14, 'ew', 'wer', NULL, 1, NULL, '2022-02-01 14:26:26', '2022-02-01 08:26:26', NULL),
-(15, 'colk1', 'Pa$$w0rd!', NULL, 1, NULL, '2022-02-01 09:54:56', NULL, NULL),
-(16, 'sd', 'we', NULL, 1, NULL, '2022-02-01 15:55:42', '2022-02-01 09:55:42', NULL),
-(17, 'WONO', 'kKRI FATAHILAH 245', NULL, 1, '2022-02-01 07:24:34', '2022-02-01 07:24:34', NULL, NULL),
-(18, 'WONO', 'kKRI FATAHILAH 245', NULL, 1, '2022-02-01 07:24:57', '2022-02-01 15:12:07', '2022-02-01 09:12:07', NULL),
-(19, 'rysikatel', 'Pa$$w0rd!', NULL, 1, '2022-02-01 07:45:03', '2022-02-01 07:45:03', NULL, NULL),
-(20, '', '', NULL, 1, '2022-02-01 08:45:27', '2022-02-01 15:11:15', '2022-02-01 09:11:15', NULL),
-(21, '', '', NULL, 1, '2022-02-01 08:46:32', '2022-02-01 15:11:11', '2022-02-01 09:11:11', NULL),
-(22, 'ruwemegy', 'Pa$$w0rd!', NULL, 1, '2022-02-01 09:11:03', '2022-02-01 09:11:03', NULL, NULL),
-(23, 'welasodot', 'Pa$$w0rd!', NULL, 1, '2022-02-01 09:11:23', '2022-02-01 15:11:33', '2022-02-01 09:11:33', NULL),
-(24, '67', '67', 67, 1, '2022-04-28 02:18:12', '2022-04-28 02:18:12', NULL, 2),
-(25, '62', '62', 62, 1, '2022-04-28 14:37:28', '2022-04-28 14:37:28', NULL, 2);
+(26, '1535010089', '1535010089', 1535010089, 1, '2022-05-07 00:30:35', '2022-05-07 06:06:14', NULL, 3);
 
 --
 -- Indexes for dumped tables
@@ -413,6 +518,12 @@ ALTER TABLE `ekstra`
 -- Indeks untuk tabel `guru`
 --
 ALTER TABLE `guru`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `jabatan`
+--
+ALTER TABLE `jabatan`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -458,6 +569,24 @@ ALTER TABLE `prestasi`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeks untuk tabel `raport`
+--
+ALTER TABLE `raport`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `raport_ekstra`
+--
+ALTER TABLE `raport_ekstra`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `raport_matpel`
+--
+ALTER TABLE `raport_matpel`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `siswa`
 --
 ALTER TABLE `siswa`
@@ -483,7 +612,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `detail_ekstra`
 --
 ALTER TABLE `detail_ekstra`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT untuk tabel `ekstra`
@@ -501,7 +630,7 @@ ALTER TABLE `jadwal_kelas`
 -- AUTO_INCREMENT untuk tabel `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `matpel`
@@ -522,6 +651,24 @@ ALTER TABLE `prestasi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT untuk tabel `raport`
+--
+ALTER TABLE `raport`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT untuk tabel `raport_ekstra`
+--
+ALTER TABLE `raport_ekstra`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `raport_matpel`
+--
+ALTER TABLE `raport_matpel`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT untuk tabel `tahun_ajaran`
 --
 ALTER TABLE `tahun_ajaran`
@@ -531,7 +678,7 @@ ALTER TABLE `tahun_ajaran`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
