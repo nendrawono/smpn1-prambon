@@ -35,8 +35,8 @@
           </div> -->
           <!-- /.col -->
           <div class="col-12">
-            <a href="<?= BASE_URL; ?>/dashboard" class="btn btn-primary btn-block" role="button">Masuk</a>
-            <!-- <button type="submit" class="btn btn-primary btn-block">Masuk</button> -->
+            <!-- <a href="<?//= BASE_URL; ?>/dashboard" class="btn btn-primary btn-block" role="button">Masuk</a> -->
+            <button type="submit" class="btn btn-primary btn-block">Masuk</button>
           </div>
           <!-- /.col -->
         </div>

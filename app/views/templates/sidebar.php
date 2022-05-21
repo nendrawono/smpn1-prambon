@@ -33,6 +33,7 @@
               </p>
             </a>
           </li>
+          <?php if($_SESSION["user_login"]['role'] == "ADMIN"){ ?>
           <li class="nav-item <?= ($data['title'] == "Master" ? 'menu-is-opening menu-open' : '') ?>">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
@@ -81,14 +82,15 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="<?= BASE_URL; ?>/emosisiswa" class="nav-link <?= ($data['title_page'] == "Emosi Siswa" ? 'active' : '') ?> ">
               <i class="nav-icon fas fa-edit"></i>
               <p>
-                INPUT HARIAN
-                <span class="badge badge-info right">2</span>
+                INPUT EMOSI
+                <!-- <span class="badge badge-info right">2</span> -->
               </p>
             </a>
           </li>
+          <?php } ?>
           <li class="nav-header">RAPOR SISWA</li>
           <li class="nav-item">
             <a href="pages/calendar.html" class="nav-link">
@@ -99,6 +101,7 @@
               </p>
             </a>
           </li>
+          <?php if($_SESSION["user_login"]['role'] == "ADMIN"){ ?>
           <li class="nav-header">PENGATURAN</li>
           <li class="nav-item <?= ($data['title'] == "Pegaturan" ? 'menu-is-opening menu-open' : '') ?>">
             <a href="<?= BASE_URL; ?>/pengaturantahunajaran" class="nav-link <?= ($data['title_page'] == "Tahun Ajaran" ? 'active' : '') ?> ">
@@ -117,8 +120,9 @@
               </p>
             </a>
           </li>
-          <li class="nav-item <?= ($data['title'] == "Dashboard" ? 'menu-is-opening menu-open' : '') ?>">
-            <a href="<?= BASE_URL; ?>/dashboard" class="nav-link ">
+          <?php } ?>
+          <li class="nav-item">
+            <a href="<?= BASE_URL; ?>/login/logout" class="nav-link ">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                 LOG OUT

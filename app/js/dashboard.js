@@ -1,4 +1,4 @@
-const MasterEkstra = function () {
+const MasterDashboard = function () {
 
   // TODO: base url
   var base_url = window.location;
@@ -52,16 +52,56 @@ const MasterEkstra = function () {
   return {
     init: function () {
     
-      masterdataTables();
-      tambahEkstra();
-      ubahEkstra();
     }
   };
 
 }();
 
 $(document).ready(function () {
-  console.log('master-ekstra-js');
+  console.log('dashboard-js');
+
+      var url = 'masterkelas/lihatjadwal';
+      console.log(dataChartTidakEmosi);
+
+      // create jadwal
+      $("#list-jadwal").empty();
+      var arrHari = ['senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'];   
+      var id = $('#kelas_sekarang_id').val();
+
+      // alert(id);
+      for(var i=0; i<6;i++){      
+        $.ajax({
+          url: url,
+          data: { id: id, hari: arrHari[i] },
+          method: "post",
+          dataType: "json",
+          async: false,
+          success: function (data) {
+            var countSpan = data.length;
+            var rowSpan = 'rowspan="'+countSpan+'"';
+            var fristTD = '<td class="tg-0pky text-center" '+rowSpan+' style="vertical-align: middle;" >'+arrHari[i]+'</td>';
+
+            $.each(data, function(index, values) {
+
+                var row = `<tr>
+                          `+fristTD+`
+                          <td class="tg-0pky text-center">`+data[index].nm_matpel+`</td>
+                          <td class="tg-0pky text-center">`+data[index].jam_mulai+` - `+data[index].jam_selesai+`</td>
+                          <td class="tg-0pky text-center">`+data[index].nm_guru+`</td>
+                        </tr>`;
+  
+                $("#list-jadwal").append(row);
+
+                fristTD='';
+            });
+
+            rowSpan
+  
+          },
+        });
+      }   
+      // end create jadwal
+
 
   (function() {
       'use strict';
@@ -86,26 +126,30 @@ $(document).ready(function () {
     labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     datasets: [
       {
-        label               : 'Digital Goods',
-        backgroundColor     : 'rgba(60,141,188,0.9)',
-        borderColor         : 'rgba(60,141,188,0.8)',
+        label               : 'Emosi',
+        backgroundColor     : 'rgba(255, 0, 0,0.9)',
+        borderColor         : 'rgba(255, 0, 0,0.8)',
         pointRadius          : false,
         pointColor          : '#3b8bba',
-        pointStrokeColor    : 'rgba(60,141,188,1)',
+        pointStrokeColor    : 'rgba(255, 0, 0,1)',
         pointHighlightFill  : '#fff',
         pointHighlightStroke: 'rgba(60,141,188,1)',
-        data                : [28, 48, 40, 19, 86, 27, 90]
+        data                : dataChartEmosi
+        // data                : [2]
+        // data                : [28, 48, 40, 19, 86, 27, 90]
       },
       {
-        label               : 'Electronics',
-        backgroundColor     : 'rgba(210, 214, 222, 1)',
-        borderColor         : 'rgba(210, 214, 222, 1)',
+        label               : 'Tidak Emosi',
+        backgroundColor     : 'rgba(60,141,188,0.9)',
+        borderColor         : 'rgba(60,141,188,0.8)',
         pointRadius         : false,
-        pointColor          : 'rgba(210, 214, 222, 1)',
+        pointColor          : 'rgba(60,141,188,1)',
         pointStrokeColor    : '#c1c7d1',
         pointHighlightFill  : '#fff',
         pointHighlightStroke: 'rgba(220,220,220,1)',
-        data                : [65, 59, 80, 81, 56, 55, 40]
+        data                : dataChartTidakEmosi
+        // data                : [65]
+        // data                : [65, 59, 80, 81, 56, 55, 40]
       },
     ]
   }
@@ -114,7 +158,7 @@ $(document).ready(function () {
     maintainAspectRatio : false,
     responsive : true,
     legend: {
-      display: false
+      display: true
     },
     scales: {
       xAxes: [{

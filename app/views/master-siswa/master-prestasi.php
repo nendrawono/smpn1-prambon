@@ -12,13 +12,27 @@
 
             <input type="hidden" class="form-control" name="siswa_id" id="siswa_id">
             <div class="form-group">
-              <label>Prestasi Siswa</label>
+              <label>Nama Dokumen</label>
               <textarea type="text" class="form-control" name="iprestasi_siswa" id="iprestasi_siswa" placeholder="Prestasi Siswa" required></textarea>
               <div class="invalid-feedback">
-                Prestasi Siswa tidak boleh kosong.
+                Nama Siswa tidak boleh kosong.
               </div>
 
             </div>
+
+            <div class="form-group">
+              <label for="exampleInputFile">Upload Dokumen</label>
+              <div class="input-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" name="file_dokumen" id="file_dokumen">
+                  <label class="custom-file-label" for="exampleInputFile">Pilih Dokumen</label>
+                </div>
+                <div class="input-group-append">
+                  <span class="input-group-text">Upload</span>
+                </div>
+              </div>
+            </div>
+
             <div style="padding-bottom:2em;">
               <button type="button" class="btn btn-success float-right btn-addPrestasi"><i class="fas fa-plus"></i> Prestasi</button>
             </div>
@@ -26,7 +40,8 @@
             <table id="table-prestasi" class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th class="text-center" style="width: 10%">Prestasi</th>
+                  <th class="text-center" style="width: 10%">Nama Dokumen</th>
+                  <th class="text-center" style="width: 10%">Dokumen</th>
                   <th class="text-center">#</th>
                 </tr>
               </thead>

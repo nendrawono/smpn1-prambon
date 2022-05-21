@@ -17,7 +17,7 @@ class Login extends Controller
     public function validasiLogin()
     {
 
-        // var_dump($_POST);
+        // var_dump("OK");
         // die();
         $validasi = $this->model('UserModel')->validasiLogin($_POST);
         
@@ -37,8 +37,11 @@ class Login extends Controller
                 default:
             }
 
+            $siswa = $this->model('SiswaModel')->getSiswaByID($validasi['siswa_id']);
+
             $user = [
-                'siswa' => $this->model('SiswaModel')->getSiswaByID($validasi['siswa_id']),
+                'siswa' => $siswa,
+                'kelas_sekarang' => $this->model('KelasModel')->getKelasByID($siswa['kelas_sekarang']),
                 'tahun_ajaran' => $this->model('TahunAjaranModel')->getTahunAjaranActive(),
                 'role' => $status_user,
             ];
@@ -71,6 +74,13 @@ class Login extends Controller
         // var_dump($redirectUrl);
         // die();
 
+    }
+
+    public function logOut()
+    {
+        session_destroy();
+        unset($_SESSION['user_login']);
+        header('location:'.BASE_URL, true, 301);
     }
 }
 

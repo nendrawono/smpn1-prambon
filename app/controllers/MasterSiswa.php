@@ -26,8 +26,51 @@ class MasterSiswa extends Controller
     {
 
 
-        // $create_raport = $this->model('SiswaModel')->createRaportSiswa($nis, $tahun_ajaran);
-        
+        $check_raport_exist  = $this->model('SiswaModel')->checkRaportSiswa($nis, $tahun_ajaran);
+        $siswa = $this->model('SiswaModel')->getRaportSiswaByID($nis);
+
+
+        // var_dump($check_raport_exist['id']);
+        // die();
+
+        if($check_raport_exist){
+            // echo "true";
+            $data = [
+                'title' => 'Master',
+                'title_page' => 'Isi Raport',
+                'id_raport' => $check_raport_exist['id'],
+                'siswa' => $siswa,
+                'tahun_ajaran' => $this->model('SiswaModel')->getTahunAjaranByID($tahun_ajaran),
+                'raport' => $this->model('SiswaModel')->getRaportData($nis, $tahun_ajaran),
+                'matpel_siswa' => $this->model('SiswaModel')->getMatpelData($check_raport_exist['id']),
+                'bakatminat_siswa' => $this->model('SiswaModel')->getEkstraData($check_raport_exist['id'])
+            ];
+        }else{
+            $raport = $this->model('SiswaModel')->insertRaportSiswa($nis, $siswa['kelas_sekarang'], $tahun_ajaran);
+
+            // $this->model('SiswaModel')->getMatpelData($raport);
+            // $this->model('SiswaModel')->getEkstraData($raport);
+            
+
+            $data = [
+                'title' => 'Master',
+                'title_page' => 'Isi Raport',
+                'id_raport' => $raport,
+                'siswa' => $siswa,
+                'tahun_ajaran' => $this->model('SiswaModel')->getTahunAjaranByID($tahun_ajaran),
+                'raport' => $this->model('SiswaModel')->getRaportData($nis, $tahun_ajaran),
+                'matpel_siswa' => $this->model('SiswaModel')->getMatpelData($raport),
+                'bakatminat_siswa' => $this->model('SiswaModel')->getEkstraData($raport)
+                // 'select2_kelas' => $this->model('SiswaModel')->getAllKelas(),
+                // 'select2_guru' => $this->model('SiswaModel')->getAllGuru()
+            ];
+
+            // getMatpelData
+            // echo "false";
+        }
+        // var_dump($data['bakatminat_siswa']);
+        // die();
+
         //isi qrcode jika di scan
         $codeContents = 'VERIVED'; 
         
@@ -38,31 +81,66 @@ class MasterSiswa extends Controller
         // echo QRcode::png($codeContents); 
         
 
-        // die();
 
-        $siswa = $this->model('SiswaModel')->getRaportSiswaByID($nis);
         // var_dump($siswa['kelas_sekarang']);
         // die();
-        $data = [
-            'title' => 'Master',
-            'title_page' => 'Isi Raport',
-            'siswa' => $siswa,
-            'tahun_ajaran' => $this->model('SiswaModel')->getTahunAjaranByID($tahun_ajaran),
-            'matpel_siswa' => $this->model('SiswaModel')->getMatpelSiswaByID($siswa['kelas_sekarang']),
-            'bakatminat_siswa' => $this->model('SiswaModel')->getBakatMinatSiswaByID($siswa['nis'])
-            // 'select2_kelas' => $this->model('SiswaModel')->getAllKelas(),
-            // 'select2_guru' => $this->model('SiswaModel')->getAllGuru()
-        ];
+        // $data = [
+        //     'title' => 'Master',
+        //     'title_page' => 'Isi Raport',
+        //     'siswa' => $siswa,
+        //     'tahun_ajaran' => $this->model('SiswaModel')->getTahunAjaranByID($tahun_ajaran),
+        //     'matpel_siswa' => $this->model('SiswaModel')->getMatpelSiswaByID($siswa['kelas_sekarang']),
+        //     'bakatminat_siswa' => $this->model('SiswaModel')->getBakatMinatSiswaByID($siswa['nis'])
+        //     // 'select2_kelas' => $this->model('SiswaModel')->getAllKelas(),
+        //     // 'select2_guru' => $this->model('SiswaModel')->getAllGuru()
+        // ];
 
-        // print_r($data);
-        // print("<pre>".print_r($data['bakatminat_siswa'],true)."</pre>");
+        // // print_r($data);
+        // print("<pre>".print_r($data,true)."</pre>");
         // die();
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
-        $this->view('master-siswa/isi-raport-reguler', $data);
+        $this->view('master-siswa/isi-raport', $data);
         // $this->view('master-siswa/isi-raport-khusus', $data);
         $this->view('templates/footer');
+    }
+
+    public function raportUpdate($status)
+    {
+
+        // var_dump('Controller raportUpdate');
+        // var_dump($_POST);
+        // die();
+
+        // echo '<pre>' , print_r($_POST) , '</pre>';
+        // exit();
+
+        $datetime = date('Y-m-d H:i:s');
+        $_POST['created_at'] = $datetime;
+        $_POST['updated_at'] = $datetime;
+        $_POST['raport_status'] = $status;
+
+        if ($this->model('SiswaModel')->updateRaportSiswa($_POST) > 0) {
+            if($status == "draft"){
+                $msg = "Raport Siswa berhasil disimpan sebagai Draft.";
+                Flasher::setFlash('Raport Siswa berhasil disimpan sebagai Draft.');
+            }else{
+                $msg = "Raport Siswa berhasil Dipublish.";
+                Flasher::setFlash('Raport Siswa berhasil Dipublish.');
+            }
+        } else {
+            if($status == "draft"){
+                $msg = "Raport Siswa gagal disimpan sebagai Draft.";
+                Flasher::setFlash('Raport Siswa gagal disimpan sebagai Draft.', 'danger');
+            }else{
+                $msg = "Raport Siswa gagal dipublish.";
+                Flasher::setFlash('Raport Siswa gagal dipublish.', 'danger');
+            }
+        }
+        // header('Location: ' . BASE_URL . '/mastersiswa');
+        echo json_encode($msg);
+        exit;
     }
 
     public function tambah()

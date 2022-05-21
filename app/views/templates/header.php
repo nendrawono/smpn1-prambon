@@ -1,9 +1,9 @@
 
 <?php
   // cek sessn users 
-  // if($_SESSION["user_login"] == null){
-  //     header("location: ".BASE_URL, true, 301);
-  // }
+  if($_SESSION["user_login"] == null){
+      header("location: ".BASE_URL, true, 301);
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">

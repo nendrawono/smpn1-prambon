@@ -368,6 +368,10 @@ const MasterSiswa = function () {
                       `+values['prestasi']+`
                       <input type="hidden" name="prestasi[]" value="`+values['prestasi']+`">
                     </td>
+                    <td class="text-center">
+                      `+values['prestasi']+`
+                      <input type="hidden" name="prestasi[]" value="`+values['prestasi']+`">
+                    </td>
                     <td class="text-center" width="5%"><button class="btn btn-danger btn-raised btn-xs hapus" id="btn-hapus" title="Hapus Prestasi"><i class="fa fa-trash"></i></button></td>
                   </tr>`;
 
@@ -450,6 +454,73 @@ const MasterSiswa = function () {
     });
   }
 
+  const updateRaport = function () {
+
+
+    $(document).on('click', '.simpan', function(){
+
+      var status = $(this).data('status');
+
+      var t = $("#form-raport").attr("action");
+      var url = t+'/'+status;
+
+      
+
+      // $("#prestasiSiswaLabel").html("Prestasi "+nm_siswa);  
+      // $(".modal-footer button[type=submit]").html("Simpan Prestasi");  
+      
+
+      const id = $(this).data("id");
+
+      $("#table-prestasi tbody").empty();
+
+      if(status == 'publish'){
+
+        if (confirm("Raport Yang Dipublish Tidak Dapat Diubah Kembali") == true) {
+          $.ajax({
+              type : 'POST',
+              url: url,
+              data : $('#form-raport').serialize(),
+              success: function (data) {
+                alert(data);
+              }
+          })
+        }
+      }else{
+        $.ajax({
+            type : 'POST',
+            url: url,
+            data : $('#form-raport').serialize(),
+            success: function (data) {
+              alert(data);
+            }
+        })
+      }
+
+      // $.ajax({
+      //   url: base_url+"/getprestasi",
+      //   data: { id: id },
+      //   method: "post",
+      //   dataType: "json",
+      //   success: function (data) {
+      //     // console.log(data);
+      //     $.each(data, function(index, values) {
+      //       var tr = `<tr class="row-prestasi">
+      //               <td class="text-center">
+      //                 `+values['prestasi']+`
+      //                 <input type="hidden" name="prestasi[]" value="`+values['prestasi']+`">
+      //               </td>
+      //               <td class="text-center" width="5%"><button class="btn btn-danger btn-raised btn-xs hapus" id="btn-hapus" title="Hapus Prestasi"><i class="fa fa-trash"></i></button></td>
+      //             </tr>`;
+
+      //         $("#table-prestasi tbody").append(tr);
+      //     });
+      //   },
+      // });
+
+    });
+  }
+
   return {
     init: function () {
     
@@ -462,6 +533,7 @@ const MasterSiswa = function () {
       detailSiswa();
       guruPendamping();
       inputNilai();
+      updateRaport();
     }
   };
 

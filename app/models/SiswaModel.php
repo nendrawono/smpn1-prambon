@@ -54,9 +54,125 @@ class SiswaModel
         return $this->db->getFirstData();
     }
 
+    // TODO::RAPORT SISWA
+
+    public function checkRaportSiswa($nis, $tahun_ajaran)
+    {
+        $query = "SELECT R.* FROM raport R
+                    WHERE R.siswa_id = :siswa_id
+                    AND R.tahun_ajaran_id = :tahun_ajaran_id ";
+
+        $this->db->query($query);
+        $this->db->bind('siswa_id', $nis);
+        $this->db->bind('tahun_ajaran_id', $tahun_ajaran);
+        return $this->db->getFirstData();
+    }
+
+    public function insertRaportSiswa($nis, $kelas_sekarang, $tahun_ajaran_id)
+    {
+
+        // echo '<pre>' , print_r($kelas_sekarang) , '</pre>';
+        // echo $kelas_sekarang;
+        // exit();
+
+        $query = "INSERT INTO raport (siswa_id, kelas_id, tahun_ajaran_id, raport_status)
+                    VALUES (:nis, :kelas_id, :tahun_ajaran_id, :raport_status) ";
+       
+        $this->db->query($query);
+        $this->db->bind('nis', $nis);
+        $this->db->bind('kelas_id', $kelas_sekarang);
+        $this->db->bind('tahun_ajaran_id', $tahun_ajaran_id);
+        $this->db->bind('raport_status', 'draft');
+
+        $this->db->execute();
+
+        $id_raport = $this->db->lastInsertId();
+
+        $this->insertRaportMatpelSiswa($id_raport, $kelas_sekarang, $tahun_ajaran_id, $nis);
+
+        return $this->db->rowCount();
+    }
+
+    public function insertRaportMatpelSiswa($id_raport, $kelas_sekarang, $tahun_ajaran_id, $nis)
+    {
+
+        $matpel = $this->getMatpelSiswaByID($kelas_sekarang);
+        $bakat_minat = $this->getBakatMinatSiswaByID($nis);
+
+        // echo '<pre>' , print_r($matpel) , '</pre>';
+        // exit();
+
+        foreach($matpel as $val){
+            $query = "INSERT INTO raport_matpel (raport_id, matpel_id , nilai, predikat)
+            VALUES (:id_raport, :matpel_id , '0', '-')";
+
+            $this->db->query($query);
+            $this->db->bind('id_raport', $id_raport);
+            $this->db->bind('matpel_id', $val['matpel_id']);
+            $this->db->execute();
+
+            $this->db->rowCount();
+        }
+
+        foreach($bakat_minat as $val){
+            $query = "INSERT INTO raport_ekstra (raport_id, ekstra_id)
+            VALUES (:id_raport, :ekstra_id)";
+
+            $this->db->query($query);
+            $this->db->bind('id_raport', $id_raport);
+            $this->db->bind('ekstra_id', $val['ekstra_id']);
+            $this->db->execute();
+
+            $this->db->rowCount();
+        }
+
+        return $id_raport;
+    }
+
+    public function getRaportData($nis, $tahun_ajaran_id)
+    {
+        $query = "SELECT R.*
+                    from raport R
+                    where R.siswa_id = :nis
+                    and R.tahun_ajaran_id = :tahun_ajaran_id ";
+
+        $this->db->query($query);
+        $this->db->bind('nis', $nis);
+        $this->db->bind('tahun_ajaran_id', $tahun_ajaran_id);
+        return $this->db->getFirstData();
+    }
+
+    public function getMatpelData($id_raport)
+    {
+        $query = "SELECT M.id, M.nm_matpel, M.kkm, M.kelompok, M.deskripsi, RM.*
+                from raport_matpel RM
+                join matpel M on RM.matpel_id = M.id 
+                where RM.raport_id = :id_raport
+                order by M.kelompok ASC";
+
+        $this->db->query($query);
+        $this->db->bind('id_raport', $id_raport);
+        return $this->db->getAllData();
+    }
+    
+
+    public function getEkstraData($id_raport)
+    {
+        $query = "SELECT E.nm_ekstra, RE.*
+                    from raport_ekstra RE
+                    join ekstra E on RE.ekstra_id = E.id 
+                    where RE.raport_id = :id_raport";
+
+        $this->db->query($query);
+        $this->db->bind('id_raport', $id_raport);
+        return $this->db->getAllData();
+    }
+
+    // END RAPORT
+
     public function getMatpelSiswaByID($kelas_sekarang_id)
     {
-        $query = "SELECT K.nm_kelas, M.id as 'matpel_id', M.nm_matpel, M.kkm, M.kelompok, M.deskripsi
+        $query = "SELECT K.id as 'kelas_sekarang_id', K.nm_kelas, M.id as 'matpel_id', M.nm_matpel, M.kkm, M.kelompok, M.deskripsi
                     FROM jadwal_kelas JK 
                     JOIN kelas K ON JK.kelas_id = K.id 
                     JOIN guru G ON JK.guru_id = G.id
@@ -71,17 +187,130 @@ class SiswaModel
         return $this->db->getAllData();
     }
 
-    public function getBakatMinatSiswaByID($kelas_sekarang_id)
+    public function getBakatMinatSiswaByID($nis)
     {
-        $query = "select S.nis, S.nm_siswa, E.id as 'ekstra_id' ,E.nm_ekstra
+        $query = "SELECT S.nis, S.nm_siswa, E.id as 'ekstra_id' ,E.nm_ekstra
                     from detail_ekstra DE
                     join siswa S on DE.siswa_id = S.id 
                     join ekstra E on DE.ekstra_id = E.id 
                     where DE.siswa_id = :id";
 
         $this->db->query($query);
-        $this->db->bind('id', $kelas_sekarang_id);
+        $this->db->bind('id', $nis);
         return $this->db->getAllData();
+    }
+
+    public function updateRaportSiswa($data)
+    {
+        // echo "model update raport";
+
+        // echo '<pre>' , print_r($data) , '</pre>';
+        // exit();
+
+        $query = "UPDATE raport SET 
+                spiritual_pred = :predikat_spiritual,
+                spiritual_des = :spiritual_des,
+                sosial_pred = :sosial_predikat,
+                sosial_des = :sosial_des,
+                sakit = :sakit,
+                ijin = :ijin,
+                tanpa_keterangan = :tanpa_ket,
+                membaca = :membaca,
+                menghitung = :menghitung,
+                prilaku = :prilaku,
+                disiplin = :disiplin,
+                kerja_keras = :kerja_keras,
+                kreatif = :kreatif,
+                mandiri = :mandiri,
+                rasa_ingin_tau = :rasa_ingin_tau,
+                tanggung_jawab = :tanggung_jawab,
+                raport_status = :raport_status,
+                created_at = :created_at
+                WHERE id = :id";
+
+        $this->db->query($query);
+        $this->db->bind('id', $data['id_raport']);
+        $this->db->bind('predikat_spiritual', $data['predikat_spiritual']);
+        $this->db->bind('spiritual_des', $data['spiritual_des']);
+        $this->db->bind('sosial_predikat', $data['sosial_predikat']);
+        $this->db->bind('sosial_des', $data['sosial_des']);
+        $this->db->bind('sakit', $data['sakit']);
+        $this->db->bind('ijin', $data['ijin']);
+        $this->db->bind('tanpa_ket', $data['tanpa_ket']);
+        $this->db->bind('membaca', $data['membaca']);
+        $this->db->bind('menghitung', $data['menghitung']);
+        $this->db->bind('prilaku', $data['prilaku']);
+        $this->db->bind('disiplin', $data['disiplin']);
+        $this->db->bind('kerja_keras', $data['kerja_keras']);
+        $this->db->bind('kreatif', $data['kreatif']);
+        $this->db->bind('mandiri', $data['mandiri']);
+        $this->db->bind('rasa_ingin_tau', $data['rasa_ingin_tau']);
+        $this->db->bind('tanggung_jawab', $data['tanggung_jawab']);
+        $this->db->bind('raport_status', $data['raport_status']);
+
+        $this->db->bind('created_at', $data['created_at']);
+        
+        $this->db->execute();
+        $r = $this->db->rowCount();
+
+        
+
+        $delete_detail = $this->deleteDetailBeforeUpdate($data['id_raport']);
+
+        foreach($data['matpel_id'] as $index => $val){
+            $query = "INSERT INTO raport_matpel (
+                        raport_id, matpel_id , nilai, predikat
+                    )
+            VALUES (:id_raport, :matpel_id , :nilai, :predikat)";
+
+            $this->db->query($query);
+            $this->db->bind('id_raport', $data['id_raport']);
+            $this->db->bind('matpel_id', $data['matpel_id'][$index]);
+            $this->db->bind('nilai', $data['nilai'][$index]);
+            $this->db->bind('predikat', $data['predikat'][$index]);
+            $this->db->execute();
+
+            $this->db->rowCount();
+        }
+
+        if(isset($data['bakatminat_id'])){
+            foreach($data['bakatminat_id'] as $index => $val){
+                $query = "INSERT INTO raport_ekstra (raport_id, ekstra_id, keterangan, created_at)
+                VALUES (:id_raport, :ekstra_id, :keterangan, :created_at)";
+    
+                $this->db->query($query);
+                $this->db->bind('id_raport', $data['id_raport']);
+                $this->db->bind('ekstra_id', $val);
+                $this->db->bind('keterangan', $data['bakatminat_ket'][$index]);
+                $this->db->bind('created_at', $data['created_at']);
+                $this->db->execute();
+    
+                $this->db->rowCount();
+            }
+        }
+
+        return $this->db->rowCount();
+
+    }
+
+    public function deleteDetailBeforeUpdate($id_raport)
+    {
+        $query = "DELETE FROM raport_matpel
+                    WHERE raport_id = :raport_id";
+        
+        $this->db->query($query);
+        $this->db->bind('raport_id', $id_raport);
+        $this->db->execute();
+        $this->db->rowCount();
+
+        $query2 = "DELETE FROM raport_ekstra
+                    WHERE raport_id = :raport_id";
+        
+        $this->db->query($query2);
+        $this->db->bind('raport_id', $id_raport);
+        $this->db->execute();
+
+        $this->db->rowCount();
     }
 
     public function getAllKelas()

@@ -85,7 +85,7 @@ class TahunAjaranModel
 
     public function getTahunAjaranActive()
     {
-        $query = "SELECT tahun_ajaran, semester FROM $this->table WHERE is_active=:active AND deleted_at IS NULL";
+        $query = "SELECT id, tahun_ajaran, semester FROM $this->table WHERE is_active=:active AND deleted_at IS NULL";
         $this->db->query($query);
         $this->db->bind('active', 1);
         return $this->db->getFirstData();

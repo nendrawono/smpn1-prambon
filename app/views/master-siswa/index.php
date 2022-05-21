@@ -15,7 +15,7 @@
       include 'master-prestasi.php'; 
       include 'master-guru-pendamping.php'; 
       include 'master-detail.php'; 
-      include 'isi-raport-reguler.php'; 
+      // include 'isi-raport.php'; 
       // include 'isi-raport-khusus.php'; 
     ?>
 
