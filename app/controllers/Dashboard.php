@@ -12,7 +12,18 @@ class Dashboard extends Controller
         $tidak_emosi =  $this->model('EmosiModel')->getDataTidakEmosi($id_siswa, $tahun_ajaran_id);
         $arr_tidak_emosi = array();
 
-        // var_dump($emosi);
+        $check_semmester= $_SESSION["user_login"]['tahun_ajaran']['semester'];
+
+        // var_dump((int)$check_semmester % 2);
+        // die();
+
+        if((int)$check_semmester % 2){
+            $label = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni'];
+        }else{
+            $label = ['Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+        }
+
+        // var_dump($_SESSION["user_login"]['tahun_ajaran']['semester']);
         // die();
 
         foreach($emosi as $item){
@@ -30,7 +41,8 @@ class Dashboard extends Controller
             'jadwal_pelajaran' => 'jadwal_pelajaran',
             'pengumuman' => $this->model('PengumumanModel')->getAllPengumuman(),
             'emosi' => json_encode($arr_emosi),
-            'tidak_emosi' => json_encode($arr_tidak_emosi)
+            'tidak_emosi' => json_encode($arr_tidak_emosi),
+            'label' => json_encode($label),
             // 'emosi' => json_encode($this->model('EmosiModel')->getDataEmosi($id_siswa, $tahun_ajaran_id)),
             // 'tidak_emosi' => json_encode($this->model('EmosiModel')->getDataTidakEmosi($id_siswa, $tahun_ajaran_id))
         ];

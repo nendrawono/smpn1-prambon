@@ -123,7 +123,8 @@ $(document).ready(function () {
 
 
   var areaChartData = {
-    labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    // labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    labels  : label,
     datasets: [
       {
         label               : 'Emosi',

@@ -22,9 +22,6 @@ class EmosiModel
 
     public function tambahDataEmosi($data)
     {
-        // var_dump($data);
-        // die();
-
         foreach($data['nis'] as $index => $val){
             $query = "INSERT INTO $this->table (siswa_id, hari, bulan, tahun_ajaran_id, emosi, created_at)
             VALUES (:siswa_id, :hari, :bulan, :tahun_ajaran_id, :emosi, :created_at)";
@@ -49,7 +46,7 @@ class EmosiModel
                     from emosi 
                     where siswa_id = :siswa_id
                     and tahun_ajaran_id = :tahun_ajaran_id
-                    and emosi = 1
+                    and emosi = 0
                     group by bulan";
         $this->db->query($query);
         $this->db->bind('siswa_id', $siswa_id);
@@ -64,7 +61,7 @@ class EmosiModel
                     from emosi 
                     where siswa_id = :siswa_id
                     and tahun_ajaran_id = :tahun_ajaran_id
-                    and emosi = 0
+                    and emosi = 1
                     group by bulan";
         $this->db->query($query);
         $this->db->bind('siswa_id', $siswa_id);
