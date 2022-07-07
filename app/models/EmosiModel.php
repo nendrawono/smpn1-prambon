@@ -42,12 +42,14 @@ class EmosiModel
 
     public function getDataEmosi($siswa_id, $tahun_ajaran_id)
     {
-        $query = "select sum(emosi) as emosi
-                    from emosi 
+        $query = "SELECT bulan ,SUM(emosi) AS 'emosi_siswa'
+                    FROM emosi 
                     where siswa_id = :siswa_id
                     and tahun_ajaran_id = :tahun_ajaran_id
-                    and emosi = 0
+                    AND emosi = 0
                     group by bulan";
+
+        // $query = " select * v_emosi from where where siswa_id = :siswa_id and tahun_ajaran_id = :tahun_ajaran_id  ";
         $this->db->query($query);
         $this->db->bind('siswa_id', $siswa_id);
         $this->db->bind('tahun_ajaran_id', $tahun_ajaran_id);
@@ -57,12 +59,12 @@ class EmosiModel
 
     public function getDataTidakEmosi($siswa_id, $tahun_ajaran_id)
     {
-        $query = "select count(emosi) as tidak_emosi
-                    from emosi 
-                    where siswa_id = :siswa_id
-                    and tahun_ajaran_id = :tahun_ajaran_id
-                    and emosi = 1
-                    group by bulan";
+        $query = "SELECT bulan ,SUM(emosi) AS 'emosi_siswa'
+                FROM emosi 
+                where siswa_id = :siswa_id
+                and tahun_ajaran_id = :tahun_ajaran_id
+                AND emosi = 1
+                group by bulan";
         $this->db->query($query);
         $this->db->bind('siswa_id', $siswa_id);
         $this->db->bind('tahun_ajaran_id', $tahun_ajaran_id);

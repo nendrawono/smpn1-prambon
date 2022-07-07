@@ -161,6 +161,9 @@
 var dataChartEmosi = <?= $data['emosi'] ?>;
 var dataChartTidakEmosi = <?= $data['tidak_emosi'] ?>;
 var label = <?= $data['label'] ?>;
+
+// alert(dataChartEmosi);
+// alert(dataChartTidakEmosi);
 </script>
 <script type="text/javascript" src="<?= BASE_JS; ?>/dashboard.js"></script>
 

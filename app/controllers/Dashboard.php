@@ -14,25 +14,46 @@ class Dashboard extends Controller
 
         $check_semmester= $_SESSION["user_login"]['tahun_ajaran']['semester'];
 
-        // var_dump((int)$check_semmester % 2);
-        // die();
-
         if((int)$check_semmester % 2){
             $label = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni'];
         }else{
             $label = ['Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
         }
 
-        // var_dump($_SESSION["user_login"]['tahun_ajaran']['semester']);
+        // var_dump($tidak_emosi[0]);
         // die();
 
-        foreach($emosi as $item){
-            array_push($arr_emosi, $item['emosi'] );
+        for($i=0; $i < 6 ;$i++){
+            if(isset($emosi[$i])){
+                if($label[$i] ){
+                        array_push($arr_emosi, $emosi[$i]['emosi_siswa'] );
+                }
+            }else{
+                array_push($arr_emosi, 0 );         
+            }
         }
 
-        foreach($tidak_emosi as $item){
-            array_push($arr_tidak_emosi, $item['tidak_emosi'] );
+        for($i=0;$i<6;$i++){
+            if(isset($tidak_emosi[$i])){
+                if($label[$i] ){
+                    array_push($arr_tidak_emosi, $tidak_emosi[$i]['emosi_siswa'] );
+                }
+            }else{
+                array_push($arr_tidak_emosi, 0 );      
+            }
         }
+
+        // var_dump($arr_tidak_emosi);
+        // die();
+
+        // foreach($emosi as $item){
+        //     array_push($arr_emosi, $item['emosi'] );
+        // }
+
+        // foreach($tidak_emosi as $item){
+        //     array_push($arr_tidak_emosi, $item['tidak_emosi'] );
+        // }
+        
         
         $data = [
             'title' => 'Dashboard',
@@ -48,6 +69,7 @@ class Dashboard extends Controller
         ];
 
     
+        // var_dump($data);
         // var_dump($data['emosi']);
         // // echo $menu_active['parent'];
         // exit;
