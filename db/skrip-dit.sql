@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 26 Jun 2022 pada 07.10
--- Versi server: 10.4.14-MariaDB
--- Versi PHP: 7.4.10
+-- Waktu pembuatan: 07 Jul 2022 pada 17.37
+-- Versi server: 10.4.24-MariaDB
+-- Versi PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -144,7 +144,22 @@ INSERT INTO `emosi` (`id`, `siswa_id`, `hari`, `bulan`, `tahun_ajaran_id`, `emos
 (65, '35', 21, 5, 2, 1, '2022-05-21 14:03:41', NULL, NULL),
 (66, '62', 21, 5, 2, 1, '2022-05-21 14:03:41', NULL, NULL),
 (67, '67', 21, 5, 2, 1, '2022-05-21 14:03:41', NULL, NULL),
-(68, '1535010089', 21, 5, 2, 1, '2022-05-21 14:03:41', NULL, NULL);
+(68, '1535010089', 21, 5, 2, 1, '2022-05-21 14:03:41', NULL, NULL),
+(69, '7', 7, 7, 4, 0, '2022-07-07 09:51:32', NULL, NULL),
+(70, '35', 7, 7, 4, 1, '2022-07-07 09:51:32', NULL, NULL),
+(71, '62', 7, 7, 4, 0, '2022-07-07 09:51:32', NULL, NULL),
+(72, '67', 7, 7, 4, 1, '2022-07-07 09:51:32', NULL, NULL),
+(73, '1535010089', 7, 7, 4, 0, '2022-07-07 09:51:32', NULL, NULL),
+(74, '7', 7, 7, 4, 0, '2022-07-07 09:52:54', NULL, NULL),
+(75, '35', 7, 7, 4, 0, '2022-07-07 09:52:54', NULL, NULL),
+(76, '62', 7, 7, 4, 0, '2022-07-07 09:52:54', NULL, NULL),
+(77, '67', 7, 7, 4, 0, '2022-07-07 09:52:54', NULL, NULL),
+(78, '1535010089', 7, 7, 4, 0, '2022-07-07 09:52:54', NULL, NULL),
+(79, '7', 7, 7, 4, 1, '2022-07-07 09:58:26', NULL, NULL),
+(80, '35', 7, 7, 4, 1, '2022-07-07 09:58:26', NULL, NULL),
+(81, '62', 7, 7, 4, 1, '2022-07-07 09:58:26', NULL, NULL),
+(82, '67', 7, 7, 4, 1, '2022-07-07 09:58:26', NULL, NULL),
+(83, '1535010089', 7, 7, 4, 1, '2022-07-07 09:58:26', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -153,7 +168,7 @@ INSERT INTO `emosi` (`id`, `siswa_id`, `hari`, `bulan`, `tahun_ajaran_id`, `emos
 --
 
 CREATE TABLE `guru` (
-  `id` int(11) NOT NULL,
+  `id` varchar(18) NOT NULL,
   `nip` varchar(255) DEFAULT NULL,
   `nm_guru` varchar(255) DEFAULT NULL,
   `alamat_guru` varchar(255) DEFAULT NULL,
@@ -168,10 +183,10 @@ CREATE TABLE `guru` (
 --
 
 INSERT INTO `guru` (`id`, `nip`, `nm_guru`, `alamat_guru`, `jabatan_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(0, '0', '-', '-', '-', '0000-00-00 00:00:00', '2022-05-07 06:10:30', NULL),
-(1535001181, '1535001181', 'GURU 1', 'Jl. Sebelah Sekolahan no 2', '3', '2022-04-24 08:34:20', '2022-05-07 05:48:33', NULL),
-(1535010073, '1535010073', 'AKU KEPALA SEKOLAH S. Pdi,P', 'Jl. Bapak Kepala Sekolah no 32', '1', '2022-05-07 00:36:36', '2022-05-07 06:02:04', NULL),
-(2147483647, '15340134381', 'Guru 2', 'Jl. Guru 2', '3', '2022-04-26 12:02:56', '2022-05-07 05:48:35', NULL);
+('123', '123', 'nendra wono', 'jl.krukah lama', '2', '2022-07-07 09:49:30', '2022-07-07 14:51:01', '2022-07-07 09:51:01'),
+('1535001181', '1535001181', 'GURU 1', 'Jl. Sebelah Sekolahan no 2', '3', '2022-04-24 08:34:20', '2022-05-07 05:48:33', NULL),
+('1535010073', '1535010073', 'AKU KEPALA SEKOLAH S. Pdi,P', 'Jl. Bapak Kepala Sekolah no 32', '1', '2022-05-07 00:36:36', '2022-05-07 06:02:04', NULL),
+('2147483647', '15340134381', 'Guru 2', 'Jl. Guru 2', '3', '2022-04-26 12:02:56', '2022-05-07 05:48:35', NULL);
 
 -- --------------------------------------------------------
 
@@ -596,7 +611,7 @@ CREATE TABLE `v_emosi` (
 --
 DROP TABLE IF EXISTS `v_emosi`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_emosi`  AS  select `siswa`.`nm_siswa` AS `nm_siswa`,`emosi`.`siswa_id` AS `siswa_id`,`emosi`.`bulan` AS `bulan`,`emosi`.`tahun_ajaran_id` AS `tahun_ajaran_id`,sum(`emosi`.`emosi`) AS `total_emosi` from (`emosi` join `siswa` on(`emosi`.`siswa_id` = `siswa`.`id`)) group by `emosi`.`siswa_id` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_emosi`  AS SELECT `siswa`.`nm_siswa` AS `nm_siswa`, `emosi`.`siswa_id` AS `siswa_id`, `emosi`.`bulan` AS `bulan`, `emosi`.`tahun_ajaran_id` AS `tahun_ajaran_id`, sum(`emosi`.`emosi`) AS `total_emosi` FROM (`emosi` join `siswa` on(`emosi`.`siswa_id` = `siswa`.`id`)) GROUP BY `emosi`.`siswa_id``siswa_id`  ;
 
 --
 -- Indexes for dumped tables
@@ -730,7 +745,7 @@ ALTER TABLE `ekstra`
 -- AUTO_INCREMENT untuk tabel `emosi`
 --
 ALTER TABLE `emosi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT untuk tabel `jadwal_kelas`
