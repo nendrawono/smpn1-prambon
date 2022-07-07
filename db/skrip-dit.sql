@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 21 Bulan Mei 2022 pada 20.33
+-- Waktu pembuatan: 26 Jun 2022 pada 07.10
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.4.10
 
@@ -134,7 +134,17 @@ INSERT INTO `emosi` (`id`, `siswa_id`, `hari`, `bulan`, `tahun_ajaran_id`, `emos
 (55, '35', 19, 5, 2, 1, '2022-05-19 12:31:25', NULL, NULL),
 (56, '62', 19, 5, 2, 1, '2022-05-19 12:31:25', NULL, NULL),
 (57, '67', 19, 5, 2, 1, '2022-05-19 12:31:25', NULL, NULL),
-(58, '1535010089', 19, 5, 2, 1, '2022-05-19 12:31:25', NULL, NULL);
+(58, '1535010089', 19, 5, 2, 1, '2022-05-19 12:31:25', NULL, NULL),
+(59, '7', 21, 5, 2, 1, '2022-05-21 14:02:17', NULL, NULL),
+(60, '35', 21, 5, 2, 1, '2022-05-21 14:02:17', NULL, NULL),
+(61, '62', 21, 5, 2, 1, '2022-05-21 14:02:17', NULL, NULL),
+(62, '67', 21, 5, 2, 1, '2022-05-21 14:02:17', NULL, NULL),
+(63, '1535010089', 21, 5, 2, 0, '2022-05-21 14:02:17', NULL, NULL),
+(64, '7', 21, 5, 2, 1, '2022-05-21 14:03:41', NULL, NULL),
+(65, '35', 21, 5, 2, 1, '2022-05-21 14:03:41', NULL, NULL),
+(66, '62', 21, 5, 2, 1, '2022-05-21 14:03:41', NULL, NULL),
+(67, '67', 21, 5, 2, 1, '2022-05-21 14:03:41', NULL, NULL),
+(68, '1535010089', 21, 5, 2, 1, '2022-05-21 14:03:41', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -535,8 +545,9 @@ CREATE TABLE `tahun_ajaran` (
 
 INSERT INTO `tahun_ajaran` (`id`, `tahun_ajaran`, `semester`, `is_active`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, '2019-2022', '1', 0, '2022-04-28 06:44:26', '2022-04-29 02:27:17', NULL),
-(2, '2021 - 2022', '2', 1, '2022-04-28 06:44:44', '2022-05-07 00:22:55', NULL),
-(3, '2018 - 2019', '1', 0, '2022-04-29 02:26:36', '2022-04-29 02:26:36', NULL);
+(2, '2021 - 2022', '2', 0, '2022-04-28 06:44:44', '2022-05-21 14:14:54', NULL),
+(3, '2018 - 2019', '1', 0, '2022-04-29 02:26:36', '2022-04-29 02:26:36', NULL),
+(4, '2021 - 2022', '1', 1, '2022-05-21 14:14:43', '2022-05-21 14:14:59', NULL);
 
 -- --------------------------------------------------------
 
@@ -719,7 +730,7 @@ ALTER TABLE `ekstra`
 -- AUTO_INCREMENT untuk tabel `emosi`
 --
 ALTER TABLE `emosi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT untuk tabel `jadwal_kelas`
@@ -773,7 +784,7 @@ ALTER TABLE `raport_matpel`
 -- AUTO_INCREMENT untuk tabel `tahun_ajaran`
 --
 ALTER TABLE `tahun_ajaran`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
