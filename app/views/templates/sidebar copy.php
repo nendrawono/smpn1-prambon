@@ -25,7 +25,6 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <?php if($_SESSION["user_login"]['role'] != "GURU"){ ?>
           <li class="nav-item <?= ($data['title'] == "Dashboard" ? 'menu-is-opening menu-open' : '') ?>">
             <a href="<?= BASE_URL; ?>/dashboard" class="nav-link ">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -34,16 +33,6 @@
               </p>
             </a>
           </li>
-          <?php }else{ ?>
-            <li class="nav-item <?= ($data['title'] == "Dashboard" ? 'menu-is-opening menu-open' : '') ?>">
-            <a href="<?= BASE_URL; ?>/dashboardguru" class="nav-link ">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Dashboard
-              </p>
-            </a>
-          </li>          
-          <?php } ?>
           <?php if($_SESSION["user_login"]['role'] == "ADMIN"){ ?>
           <li class="nav-item <?= ($data['title'] == "Master" ? 'menu-is-opening menu-open' : '') ?>">
             <a href="#" class="nav-link">
@@ -102,41 +91,16 @@
             </a>
           </li>
           <?php } ?>
-
-          <?php if($_SESSION["user_login"]['role'] == "GURU"){ ?>
-          <li class="nav-item">
-            <a href="<?= BASE_URL; ?>/mastersiswa" class="nav-link <?= ($data['title_page'] == "Data Master Siswa" || $data['title_page'] == "Isi Raport" ? 'active' : '') ?> ">
-              <i class="far fa-circle nav-icon"></i>
-              <p>SISWA</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?= BASE_URL; ?>/masterkelas" class="nav-link <?= ($data['title_page'] == "Data Master Kelas" ? 'active' : '') ?> ">
-              <i class="far fa-circle nav-icon"></i>
-              <p>KELAS</p>
-            </a>
-          </li>
-          <li class="nav-item">
-                <a href="<?= BASE_URL; ?>/masterekstra" class="nav-link <?= ($data['title_page'] == "Data Master Bakat Minat" ? 'active' : '') ?> ">
-              <i class="far fa-circle nav-icon"></i>
-              <p>BAKAT MINAT</p>
-            </a>
-          </li>
-          <?php } ?>
-
-          
-          <?php if($_SESSION["user_login"]['role'] == "ORTU"){ ?>
-          <li class="nav-header">RAPOR SISWA</li>
-          <li class="nav-item">
-            <a href="<?= BASE_URL; ?>/raporsiswa/<?= $_SESSION["user_login"]["siswa"]["nis"]; ?>/<?= $_SESSION["user_login"]['tahun_ajaran']['id'] ?>" class="nav-link">
+          <li class="nav-header d-none">RAPOR SISWA</li>
+          <li class="nav-item d-none">
+            <a href="pages/calendar.html" class="nav-link">
               <i class="nav-icon far fa-calendar-alt"></i>
               <p>
                 RAPOR
-                <span class="badge badge-info right"><?= $_SESSION["user_login"]['tahun_ajaran']['tahun_ajaran']."/".$_SESSION["user_login"]['tahun_ajaran']['semester'] ?></span>
+                <span class="badge badge-info right">2</span>
               </p>
             </a>
           </li>
-          <?php } ?>
           <?php if($_SESSION["user_login"]['role'] == "ADMIN"){ ?>
           <li class="nav-header">PENGATURAN</li>
           <li class="nav-item <?= ($data['title'] == "Pegaturan" ? 'menu-is-opening menu-open' : '') ?>">

@@ -226,7 +226,7 @@
           <tr>
             <td class="text-center" style="width: 5%; vertical-align: middle;"> <?= $no++ ?></td>
             <td class="text-center" style="width: 20%; vertical-align: middle;" >
-              <input type="hidden" class="form-control predikat" name="bakatminat_id[]"  value="<?= $bm['ekstra_id'] ?>"> </input>
+              <input type="text" class="form-control predikat" name="bakatminat_id[]"  value="<?= $m['id'] ?>"> </input>
               <?= $bm['nm_ekstra'] ?>
             </td>
             <!-- <td class="text-left" >Baik<br>Mampu menguasa materi</td> -->

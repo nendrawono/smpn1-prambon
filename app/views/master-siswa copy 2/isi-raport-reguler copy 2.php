@@ -1,9 +1,9 @@
 <div class="card mr-5 ml-5" id="report-reguler">
-  <form action="<?= BASE_URL; ?>/mastersiswa/raportUpdate" class="needs-validation" method="POST"  id="form-raport" enctype="multipart/form-data" novalidate>
-
   <div class="card-body">
   
   <input type="hidden" name="id_raport" id="id_raport" value="<?= $data['id_raport']; ?>" ></input>
+
+
 
     <div class="row justify-content-md-center">
       <p>
@@ -93,7 +93,7 @@
               </div>
             </td>
             <td>
-              <textarea class="form-control" rows="3" id="spiritual_des" name="spiritual_des"  width="100%"><?= $data['raport']['spiritual_des'] ?></textarea>
+              <textarea class="form-control" rows="3" id="spiritual_des" width="100%"><?= $data['raport']['spiritual_des'] ?></textarea>
             </td>
           </tr>
         </tbody>
@@ -110,7 +110,7 @@
         <tbody>
           <tr>
             <td class="text-center">
-              <select class="form-control select2" id="sosial_predikat" name="sosial_predikat" style="width: 100%;">
+              <select class="form-control select2" id="sosial_predikat" name="predikat_spiritual" style="width: 100%;">
                 <option value="SB">SANGAT BAIK</option>
                 <option value="B">BAIK</option>
                 <option value="C">CUKUP</option>
@@ -118,7 +118,7 @@
               </select>
             </th>
             <td>
-              <textarea class="form-control" rows="3"  name="sosial_des" id="sosial_des" width="100%"><?= $data['raport']['sosial_des'] ?></textarea>
+              <textarea class="form-control" rows="3" id="sosial_des" width="100%"><?= $data['raport']['sosial_des'] ?></textarea>
             </th>
           </tr>
         </tbody>
@@ -157,7 +157,7 @@
             <tr>
               <td class="text-center"><?= $no++ ?></th>
               <td class="text-left">
-                <input type="hidden" class="form-control" name="matpel_id[]" value="<?= $m['matpel_id'] ?>"> </input>
+                <input type="hidden" class="form-control" name="matpel[]"> </input>
                 <?= $m['nm_matpel'] ?>
               </td>
               <td class="text-center"><?= $m['kkm'] ?></th>
@@ -165,7 +165,7 @@
                 <input type="number" class="form-control nilai" name="nilai[]" value="<?= $m['nilai'] ?>"> </input>
               </th>
               <td class="text-center">
-                <input type="hidden" class="form-control predikat" name="predikat[]"  value="<?= $m['predikat'] ?>"> </input>
+                <input type="hidden" class="form-control predikat" name="predikat[]"> </input>
                 <p class="lbl-predikat"><?= $m['predikat'] ?></p>
               </th>
               <td class="text-left"><?= $m['deskripsi'] ?></th>
@@ -225,10 +225,7 @@
           <?php foreach ($data['bakatminat_siswa'] as $bm) : ?>
           <tr>
             <td class="text-center" style="width: 5%; vertical-align: middle;"> <?= $no++ ?></td>
-            <td class="text-center" style="width: 20%; vertical-align: middle;" >
-              <input type="hidden" class="form-control predikat" name="bakatminat_id[]"  value="<?= $bm['ekstra_id'] ?>"> </input>
-              <?= $bm['nm_ekstra'] ?>
-            </td>
+            <td class="text-center" style="width: 20%; vertical-align: middle;" ><?= $bm['nm_ekstra'] ?></td>
             <!-- <td class="text-left" >Baik<br>Mampu menguasa materi</td> -->
             <td class="text-left" >
               <textarea class="form-control" rows="2" id="bakatminat_ket" name="bakatminat_ket[]" width="100%"> <?= $bm['keterangan'] ?> </textarea>
@@ -249,21 +246,21 @@
               <td style="width: 30%">Sakit</td>
               <td class= "text-center" style="width: 5%">:</td>
               <td style="width: 80%">
-                <input type="number" class="form-control" style="width:4em;" name="sakit" value="<?= $data['raport']['sakit'] ?>" > </input>
+                <input type="number" class="form-control" style="width:4em;" name="sakit[]" value="<?= $data['raport']['sakit'] ?>" > </input>
               </td>
             </tr>
             <tr>
               <td style="width: 30%">Ijin</td>
               <td class= "text-center" style="width: 5%">:</td>
               <td style="width: 80%">
-                <input type="number" class="form-control" style="width:4em;" name="ijin" value="<?= $data['raport']['ijin'] ?>" > </input>
+                <input type="number" class="form-control" style="width:4em;" name="ijin[]" value="<?= $data['raport']['ijin'] ?>" > </input>
               </td>
             </tr>
             <tr>
               <td style="width: 30%">Tanpa Keterangan</td>
               <td class= "text-center" style="width: 5%">:</td>
               <td style="width: 80%">
-                <input type="number" class="form-control" style="width:4em;" name="tanpa_ket" value="<?= $data['raport']['tanpa_keterangan'] ?>" > </input>
+                <input type="number" class="form-control" style="width:4em;" name="tanpa_ket[]" value="<?= $data['raport']['tanpa_keterangan'] ?>" > </input>
               </td>
             </tr>
         </tbody>
@@ -271,6 +268,63 @@
       </div>
       
     </div>
+
+    <div class="row ml-5 mr-5 mt-5">
+      <div class="col-7">
+        <table id="table-sikap-spiritual" style="width:100%"  >
+          <tbody>
+            <tr>
+              <td style="width: 20%">Mengetahui:</td>
+              <td class= "text-center" style="width: 5%"></td>
+              <!-- <td style="width: 80%"> -</td> -->
+            </tr>
+            <tr>
+              <td style="width: 20%">Orang Tua Wali</td>
+              <td class= "text-center" style="width: 5%"></td>
+              <td style="width: 80%"></td>
+            </tr>
+            <tr>
+              <td style="width: 20%;height:120px;"></td>
+              <td class= "text-center" style="width: 5%"></td>
+              <td style="width: 80%"> </td>
+            </tr>
+            <tr>
+              <td style="width: 20%" colspan="2"><hr></td>
+              <td style="width: 80%"> </td>
+            </tr>
+          </tbody>
+        </table>    
+      </div>
+      <div class="col-4">
+        <table id="table-sikap-spiritual" style="width:100%" border=0>
+          <tbody>
+            <tr>
+              <td style="width: 20%" colspan="3">Krian, 15 Desember 2022</td>
+              <!-- <td style="width: 80%"> -</td> -->
+            </tr>
+            <tr>
+              <td style="width: 20%" colspan="3">Wali Kelas</td>
+            </tr>
+            <tr>
+              <td style="width: 20%;height:120px;"></td>
+              <td class= "text-center" style="width: 5%"></td>
+              <td style="width: 80%"> </td>
+            </tr>
+            <tr>
+              <td style="width: 20%; vertical-align: bottom;" colspan="3">
+                <p style="font-weight-bold">KHALIMAH, Spd</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="width: 20%; vertical-align: top;" colspan="3"><p>NIP. 124343132</p></td>
+            </tr>
+            
+          </tbody>
+        </table>    
+      </div>
+    </div>
+      
+
 
   </div>
 </div>
@@ -360,23 +414,97 @@
       <textarea class="form-control ml-4" rows="4" name="mandiri" id="mandiri" width="100%"> <?= $data['raport']['mandiri'] ?> </textarea>
 
       <p class="font-weight-bold ml-4 mt-3"> e. RASA INGIN TAHU</p>
-      <textarea class="form-control ml-4" rows="4" name="rasa_ingin_tau" id="rasa_ingin_tau" width="100%"> <?= $data['raport']['rasa_ingin_tau'] ?> </textarea>
+      <textarea class="form-control ml-4" rows="4" name="rasa_ingin_tahu" id="rasa_ingin_tahu" width="100%"> <?= $data['raport']['rasa_ingin_tau'] ?> </textarea>
 
       <p class="font-weight-bold ml-4 mt-3"> f. TANGGUNG JAWAB</p>
       <textarea class="form-control ml-4" rows="4" name="tanggung_jawab" id="tanggung_jawab" width="100%"> <?= $data['raport']['tanggung_jawab'] ?> </textarea>
      
     </div>
 
-    <div class="float-right mt-5">
-      <?php if($data['raport']['raport_status'] == 'draft'){ ?>
-      <button type="button" class="btn btn-warning simpan" data-status="draft" data-dismiss="modal">Simpan Draft</button>
-      <button type="button" class="btn btn-success simpan" data-status="publish">Publish</button>   
-      <?php } ?>    
-    <div>
+    <div class="row ml-5 mr-5 mt-5">
+      <div class="col-7">
+        <table id="table-sikap-spiritual" style="width:100%" border=0>
+          <tbody>
+            <tr>
+              <td style="width: 20%">Mengetahui:</td>
+              <td class= "text-center" style="width: 5%"></td>
+              <!-- <td style="width: 80%"> -</td> -->
+            </tr>
+            <tr>
+              <td style="width: 20%">Kepala Sekolah</td>
+              <td class= "text-center" style="width: 5%"></td>
+              <td style="width: 80%"></td>
+            </tr>
+            <tr>
+              <td style="width: 20%;height:120px;"></td>
+              <td class= "text-center" style="width: 5%"></td>
+              <td style="width: 80%"> </td>
+            </tr>
+            <tr>
+              <td style="width: 20%; vertical-align: bottom;" colspan="3">
+                <p style="font-weight-bold">Drs H. Suwarno, M.M</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="width: 20%; vertical-align: top;" colspan="3"><p>NIP. 124343132</p></td>
+            </tr>
+          </tbody>
+        </table>    
+      </div>
+      <div class="col-4">
+        <table id="table-sikap-spiritual" style="width:100%" border=0>
+          <tbody>
+            <tr>
+              <td style="width: 20%" colspan="3">Krian, 15 Desember 2022</td>
+              <!-- <td style="width: 80%"> -</td> -->
+            </tr>
+            <tr>
+              <td style="width: 20%" colspan="3">Koor. Pend Inklusif</td>
+            </tr>
+            <tr>
+              <td style="width: 20%;height:120px;"></td>
+              <td class= "text-center" style="width: 5%"></td>
+              <td style="width: 80%"> </td>
+            </tr>
+            <tr>
+              <td style="width: 20%; vertical-align: bottom;" colspan="3">
+                <p style="font-weight-bold">IDA HAYATI, S.Pd, M.Pd</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="width: 20%; vertical-align: top;" colspan="3"><p>NIP. 124343132</p></td>
+            </tr>
+            
+          </tbody>
+        </table>    
+      </div>
+    </div>
+
+    <div class="row ml-5 mr-5 mt-5">
+      <div class="col-4">
+        <table id="table-sikap-spiritual" style="width:100%; margin-left:18em;" border=0>
+          <tbody>
+            <tr>
+              <td style="width: 20%; text-align:center;" colspan="3">Orang Tua/Wali Murid</td>
+            </tr>
+            <tr>
+              <td style="width: 20%;height:120px;"></td>
+              <td class= "text-center" style="width: 5%"></td>
+              <td style="width: 80%"> </td>
+            </tr>
+            <tr>
+              <td style="width: 20%; vertical-align: bottom;" colspan="3">
+                <p style="font-weight-bold;text-align:center;">.............................</p>
+              </td>
+            </tr>            
+          </tbody>
+        </table>    
+      </div>
+    </div>
+      
+
 
   </div>
-
-</form>
 </div>
 
 <script type="text/javascript" src="<?= BASE_JS; ?>/mastersiswa.js"></script>

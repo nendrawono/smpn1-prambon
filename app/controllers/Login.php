@@ -17,43 +17,82 @@ class Login extends Controller
     public function validasiLogin()
     {
 
-        // var_dump("OK");
-        // die();
+        
         $validasi = $this->model('UserModel')->validasiLogin($_POST);
+
+        // var_dump($validasi);
+        // die();
         
         if($validasi){
             $status_user = null;
 
             switch ($validasi['id_role']) {
-                case 1:
+                case "1":
                     $status_user = "ADMIN";
+
+                    $siswa = $this->model('SiswaModel')->getSiswaByID($validasi['siswa_id']);
+
+                    $user = [
+                        'siswa' => $siswa,
+                        'kelas_sekarang' => $this->model('KelasModel')->getKelasByID($siswa['kelas_sekarang']),
+                        'tahun_ajaran' => $this->model('TahunAjaranModel')->getTahunAjaranActive(),
+                        'role' => $status_user,
+                    ];
+
+                    $_SESSION["user_login"] = $user;
+
+                    // var_dump($_SESSION["user_login"]);
+                    // die();
+
+                    $redirectUrl = BASE_URL."/dashboard";
+
                     break;
-                case 2:
+                case "2":
                     $status_user = "GURU";
+
+                    $siswa = $this->model('GuruModel')->getGuruByID($validasi['siswa_id']);
+
+                  
+
+                    $user = [
+                        'siswa' => $siswa,
+                        'tahun_ajaran' => $this->model('TahunAjaranModel')->getTahunAjaranActive(),
+                        'role' => $status_user,
+                    ];
+
+                    // var_dump($user);
+                    // die();
+
+                    $_SESSION["user_login"] = $user;
+
+                    $redirectUrl = BASE_URL."/dashboardguru";
+
                     break;
-                case 3:
+                case "3":
                     $status_user = "ORTU";
+
+                    $siswa = $this->model('SiswaModel')->getSiswaByID($validasi['siswa_id']);
+
+                    $user = [
+                        'siswa' => $siswa,
+                        'kelas_sekarang' => $this->model('KelasModel')->getKelasByID($siswa['kelas_sekarang']),
+                        'tahun_ajaran' => $this->model('TahunAjaranModel')->getTahunAjaranActive(),
+                        'role' => $status_user,
+                    ];
+
+                            
+                    $_SESSION["user_login"] = $user;
+
+                    // var_dump($_SESSION["user_login"]);
+                    // die();
+
+                    $redirectUrl = BASE_URL."/dashboard";
+
                     break;
                 default:
             }
-
-            $siswa = $this->model('SiswaModel')->getSiswaByID($validasi['siswa_id']);
-
-            $user = [
-                'siswa' => $siswa,
-                'kelas_sekarang' => $this->model('KelasModel')->getKelasByID($siswa['kelas_sekarang']),
-                'tahun_ajaran' => $this->model('TahunAjaranModel')->getTahunAjaranActive(),
-                'role' => $status_user,
-            ];
-
            
 
-            $_SESSION["user_login"] = $user;
-
-            // var_dump($_SESSION["user_login"]);
-            // die();
-
-            $redirectUrl = BASE_URL."/dashboard";
 
             var_dump("sukses");
             // header("location: ".BASE_URL."/dashboard", true, 301);
@@ -68,6 +107,9 @@ class Login extends Controller
             $redirectUrl = BASE_URL;
 
         }
+
+        // var_dump($redirectUrl);
+        // die();
 
         header("location: ".$redirectUrl, true, 301);
 

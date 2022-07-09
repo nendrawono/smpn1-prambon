@@ -30,10 +30,11 @@ class MasterSiswa extends Controller
         $siswa = $this->model('SiswaModel')->getRaportSiswaByID($nis);
 
 
-        // var_dump($check_raport_exist['id']);
-        // die();
+        
 
         if($check_raport_exist){
+            // var_dump($check_raport_exist['id']);
+            // die();
             // echo "true";
             $data = [
                 'title' => 'Master',
@@ -46,6 +47,7 @@ class MasterSiswa extends Controller
                 'bakatminat_siswa' => $this->model('SiswaModel')->getEkstraData($check_raport_exist['id'])
             ];
         }else{
+            
             $raport = $this->model('SiswaModel')->insertRaportSiswa($nis, $siswa['kelas_sekarang'], $tahun_ajaran);
 
             // $this->model('SiswaModel')->getMatpelData($raport);
@@ -69,6 +71,9 @@ class MasterSiswa extends Controller
             // echo "false";
         }
         // var_dump($data['bakatminat_siswa']);
+        // die();
+
+        // echo '<pre>' . print_r($data, true) . '</pre>';
         // die();
 
         //isi qrcode jika di scan

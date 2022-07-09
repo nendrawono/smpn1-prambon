@@ -29,9 +29,6 @@ class GuruModel
 
     public function tambahDataGuru($data)
     {
-//   var_dump($data['nip']);
-//         die();
-        
         $query = "INSERT INTO $this->table (id, nip, nm_guru, alamat_guru, jabatan_id, created_at, updated_at)
                     VALUES (:id ,:nip, :nm_guru, :alamat_guru, :jabatan_id, :created_at, :updated_at)";
 
@@ -46,33 +43,8 @@ class GuruModel
         $this->db->bind('updated_at', $data['updated_at']);
         
 
-      
-
-        $this->db->execute();
-
-        $this->createUserGuru($data);
-
-        return $this->db->rowCount();
-    }
-
-    public function createUserGuru($dataSiswa)
-    {
-
-        $queryUser = "INSERT INTO users (username, password, siswa_id, status, id_role, created_at, updated_at)
-                    VALUES (:username, :password, :siswa_id, :status, :id_role, :created_at, :updated_at)";
-
-        $this->db->query($queryUser);
-        $this->db->bind('username', $dataSiswa['nip']);
-        $this->db->bind('password', $dataSiswa['nip']);
-        $this->db->bind('siswa_id', $dataSiswa['nip']);
-        $this->db->bind('status', '1');
-        $this->db->bind('id_role', '2'); //2 role guru
-        $this->db->bind('created_at', $dataSiswa['created_at']);
-        $this->db->bind('updated_at', $dataSiswa['updated_at']);
-
         $this->db->execute();
         return $this->db->rowCount();
-
     }
 
     public function getGuruByID($id)
