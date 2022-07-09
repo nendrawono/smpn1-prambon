@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 07 Jul 2022 pada 19.19
+-- Waktu pembuatan: 09 Jul 2022 pada 17.17
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 7.4.29
 
@@ -571,29 +571,6 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `password`, `siswa_id`, `status`, `created_at`, `updated_at`, `deleted_at`, `id_role`) VALUES
 (1, 'admin', 'admin', 1, 1, NULL, NULL, NULL, 1),
 (26, '1535010089', '1535010089', 1535010089, 1, '2022-05-07 00:30:35', '2022-05-07 06:06:14', NULL, 3);
-
--- --------------------------------------------------------
-
---
--- Stand-in struktur untuk tampilan `v_emosi`
--- (Lihat di bawah untuk tampilan aktual)
---
-CREATE TABLE `v_emosi` (
-`nm_siswa` varchar(255)
-,`siswa_id` varchar(255)
-,`bulan` int(11)
-,`tahun_ajaran_id` int(11)
-,`total_emosi` decimal(32,0)
-);
-
--- --------------------------------------------------------
-
---
--- Struktur untuk view `v_emosi`
---
-DROP TABLE IF EXISTS `v_emosi`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_emosi`  AS SELECT `siswa`.`nm_siswa` AS `nm_siswa`, `emosi`.`siswa_id` AS `siswa_id`, `emosi`.`bulan` AS `bulan`, `emosi`.`tahun_ajaran_id` AS `tahun_ajaran_id`, sum(`emosi`.`emosi`) AS `total_emosi` FROM (`emosi` join `siswa` on(`emosi`.`siswa_id` = `siswa`.`id`)) GROUP BY `emosi`.`siswa_id``siswa_id`  ;
 
 --
 -- Indexes for dumped tables
