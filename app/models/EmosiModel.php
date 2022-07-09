@@ -42,7 +42,7 @@ class EmosiModel
 
     public function getDataEmosi($siswa_id, $tahun_ajaran_id)
     {
-        $query = "SELECT bulan ,SUM(emosi) AS 'emosi_siswa'
+        $query = "SELECT bulan ,count(emosi) AS 'emosi_siswa'
                     FROM emosi 
                     where siswa_id = :siswa_id
                     and tahun_ajaran_id = :tahun_ajaran_id
@@ -59,7 +59,7 @@ class EmosiModel
 
     public function getDataTidakEmosi($siswa_id, $tahun_ajaran_id)
     {
-        $query = "SELECT bulan ,SUM(emosi) AS 'emosi_siswa'
+        $query = "SELECT bulan ,count(emosi) AS 'emosi_siswa'
                 FROM emosi 
                 where siswa_id = :siswa_id
                 and tahun_ajaran_id = :tahun_ajaran_id
