@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 09 Jul 2022 pada 17.17
+-- Waktu pembuatan: 09 Jul 2022 pada 20.48
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 7.4.29
 
@@ -139,7 +139,22 @@ INSERT INTO `emosi` (`id`, `siswa_id`, `hari`, `bulan`, `tahun_ajaran_id`, `emos
 (135, '35', 7, 7, 5, 1, '2022-07-07 12:13:18', NULL, NULL),
 (136, '62', 7, 7, 5, 1, '2022-07-07 12:13:18', NULL, NULL),
 (137, '67', 7, 7, 5, 1, '2022-07-07 12:13:18', NULL, NULL),
-(138, '1535010089', 7, 7, 5, 1, '2022-07-07 12:13:18', NULL, NULL);
+(138, '1535010089', 7, 7, 5, 1, '2022-07-07 12:13:18', NULL, NULL),
+(139, '7', 9, 7, 5, 1, '2022-07-09 10:26:17', NULL, NULL),
+(140, '35', 9, 7, 5, 1, '2022-07-09 10:26:17', NULL, NULL),
+(141, '62', 9, 7, 5, 1, '2022-07-09 10:26:17', NULL, NULL),
+(142, '67', 9, 7, 5, 1, '2022-07-09 10:26:17', NULL, NULL),
+(143, '1535010089', 9, 7, 5, 1, '2022-07-09 10:26:17', NULL, NULL),
+(144, '7', 9, 7, 5, 1, '2022-07-09 10:26:35', NULL, NULL),
+(145, '35', 9, 7, 5, 1, '2022-07-09 10:26:35', NULL, NULL),
+(146, '62', 9, 7, 5, 1, '2022-07-09 10:26:35', NULL, NULL),
+(147, '67', 9, 7, 5, 1, '2022-07-09 10:26:35', NULL, NULL),
+(148, '1535010089', 9, 7, 5, 0, '2022-07-09 10:26:35', NULL, NULL),
+(149, '1535010089', 9, 7, 5, 0, '2022-07-09 12:04:30', NULL, NULL),
+(150, '35', 9, 7, 5, 1, '2022-07-09 12:04:30', NULL, NULL),
+(151, '62', 9, 7, 5, 1, '2022-07-09 12:04:30', NULL, NULL),
+(152, '67', 9, 7, 5, 1, '2022-07-09 12:04:30', NULL, NULL),
+(153, '7', 9, 7, 5, 1, '2022-07-09 12:04:30', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -148,7 +163,7 @@ INSERT INTO `emosi` (`id`, `siswa_id`, `hari`, `bulan`, `tahun_ajaran_id`, `emos
 --
 
 CREATE TABLE `guru` (
-  `id` varchar(18) NOT NULL,
+  `id` varchar(50) NOT NULL,
   `nip` varchar(255) DEFAULT NULL,
   `nm_guru` varchar(255) DEFAULT NULL,
   `alamat_guru` varchar(255) DEFAULT NULL,
@@ -163,6 +178,7 @@ CREATE TABLE `guru` (
 --
 
 INSERT INTO `guru` (`id`, `nip`, `nm_guru`, `alamat_guru`, `jabatan_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
+('085733502466', '085733502466', 'Test Guru', 'Jl. Test Guru', '3', '2022-07-09 11:12:20', '2022-07-09 11:12:20', NULL),
 ('111111111111', '111111111111', 'Nendra', 'Jl.krukah', '2', '2022-07-07 10:46:37', '2022-07-07 15:46:50', '2022-07-07 10:46:50'),
 ('123', '123', 'nendra wono', 'jl.krukah lama', '2', '2022-07-07 09:49:30', '2022-07-07 14:51:01', '2022-07-07 09:51:01'),
 ('1535001181', '1535001181', 'GURU 1', 'Jl. Sebelah Sekolahan no 2', '3', '2022-04-24 08:34:20', '2022-05-07 05:48:33', NULL),
@@ -205,7 +221,7 @@ CREATE TABLE `jadwal_kelas` (
   `jam_mulai` varchar(255) DEFAULT NULL,
   `jam_selesai` varchar(255) DEFAULT '',
   `kelas_id` int(11) DEFAULT NULL,
-  `guru_id` int(11) DEFAULT NULL,
+  `guru_id` varchar(50) DEFAULT NULL,
   `matpel_id` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
@@ -217,13 +233,13 @@ CREATE TABLE `jadwal_kelas` (
 --
 
 INSERT INTO `jadwal_kelas` (`id`, `hari`, `jam_ke`, `jam_mulai`, `jam_selesai`, `kelas_id`, `guru_id`, `matpel_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(8, 'selasa', '1', '07:00', '12:00', 1, 1535001181, 5, '2022-04-24 15:03:28', '2022-04-26 16:29:58', NULL),
-(12, 'kamis', '1', '07:00', '08:00', 1, 1535001181, 6, '2022-04-26 11:37:57', '2022-04-26 11:37:57', NULL),
-(13, 'senin', '1', '07:00', '09:00', 1, 1535001181, 5, '2022-04-26 12:00:17', '2022-04-26 12:00:17', NULL),
-(14, 'senin', '2', '10:00', '11:00', 1, 1535001181, 6, '2022-04-26 12:00:17', '2022-04-26 12:00:17', NULL),
-(15, 'senin', '3', '12:00', '15:00', 1, 1535001181, 7, '2022-04-26 12:00:17', '2022-04-26 12:00:17', NULL),
-(16, 'rabu', '1', '07:00', '11:00', 1, 1535001181, 8, '2022-04-26 12:01:02', '2022-04-26 12:01:02', NULL),
-(17, 'senin', '1', '07:00', '08:00', 2, 1535001181, 5, '2022-04-29 04:25:52', '2022-04-29 04:25:52', NULL);
+(8, 'selasa', '1', '07:00', '12:00', 1, '1535001181', 5, '2022-04-24 15:03:28', '2022-04-26 16:29:58', NULL),
+(12, 'kamis', '1', '07:00', '08:00', 1, '1535001181', 6, '2022-04-26 11:37:57', '2022-04-26 11:37:57', NULL),
+(13, 'senin', '1', '07:00', '09:00', 1, '1535001181', 5, '2022-04-26 12:00:17', '2022-04-26 12:00:17', NULL),
+(14, 'senin', '2', '10:00', '11:00', 1, '1535001181', 6, '2022-04-26 12:00:17', '2022-04-26 12:00:17', NULL),
+(15, 'senin', '3', '12:00', '15:00', 1, '1535001181', 7, '2022-04-26 12:00:17', '2022-04-26 12:00:17', NULL),
+(16, 'rabu', '1', '07:00', '11:00', 1, '1535001181', 8, '2022-04-26 12:01:02', '2022-04-26 12:01:02', NULL),
+(17, 'senin', '1', '07:00', '08:00', 2, '1535001181', 5, '2022-04-29 04:25:52', '2022-04-29 04:25:52', NULL);
 
 -- --------------------------------------------------------
 
@@ -352,7 +368,7 @@ INSERT INTO `pengumuman` (`id`, `isi_pengumuman`, `created_at`, `updated_at`, `d
 
 CREATE TABLE `prestasi` (
   `id` int(11) NOT NULL,
-  `siswa_id` int(11) DEFAULT NULL,
+  `siswa_id` varchar(50) DEFAULT NULL,
   `prestasi` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
@@ -364,8 +380,8 @@ CREATE TABLE `prestasi` (
 --
 
 INSERT INTO `prestasi` (`id`, `siswa_id`, `prestasi`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 7, 'lomba robotik tahun 2022', '2022-04-28 18:38:59', NULL, NULL),
-(2, 7, 'lomba balet', NULL, NULL, NULL);
+(1, '7', 'lomba robotik tahun 2022', '2022-04-28 18:38:59', NULL, NULL),
+(2, '7', 'lomba balet', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -375,7 +391,7 @@ INSERT INTO `prestasi` (`id`, `siswa_id`, `prestasi`, `created_at`, `updated_at`
 
 CREATE TABLE `raport` (
   `id` int(11) NOT NULL,
-  `siswa_id` int(11) DEFAULT NULL,
+  `siswa_id` varchar(50) DEFAULT NULL,
   `kelas_id` int(11) DEFAULT NULL,
   `tahun_ajaran_id` int(11) DEFAULT NULL,
   `spiritual_pred` text DEFAULT NULL,
@@ -408,9 +424,12 @@ CREATE TABLE `raport` (
 --
 
 INSERT INTO `raport` (`id`, `siswa_id`, `kelas_id`, `tahun_ajaran_id`, `spiritual_pred`, `spiritual_des`, `sosial_pred`, `sosial_des`, `sakit`, `ijin`, `tanpa_keterangan`, `membaca`, `menghitung`, `prilaku`, `disiplin`, `kerja_keras`, `kreatif`, `mandiri`, `rasa_ingin_tau`, `tanggung_jawab`, `kepala_sekolah_id`, `wali_kelas_id`, `koor_inklusif_id`, `raport_status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(11, 1535010089, 1, 2, 'B', 'spiritual des', 'C', 'sosial des', 1, 2, 4, 'abcde', 'abcde menghitung', 'abcde prilaku', 'abcde disiplin', 'abcde kerja keras', 'abcde kreatif', 'abcde mendiri', 'abcde rasa', 'abcde tgng jawab', 1535010073, 1535001181, 1535001181, 'draft', '2022-05-09 14:56:10', '2022-05-12 17:48:39', NULL),
-(36, 35, 1, 2, 'SB', 'Aliquip qui adipisic', 'SB', 'Earum est vero face', 1, 1, 1, '     Ad repellendus Occa     ', '     Quidem quasi volupta     ', '     Nulla sit est dolore     ', '     Totam sed expedita l     ', '     Doloremque inventore     ', '     Ducimus at distinct     ', '     Aut a nostrud proide     ', '     Consequat Voluptate     ', '     Dolor quia qui esse     ', NULL, NULL, NULL, 'publish', '2022-05-16 12:20:38', '2022-05-16 17:20:38', NULL),
-(39, 7, 2, 2, NULL, NULL, NULL, NULL, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'draft', NULL, NULL, NULL);
+(11, '1535010089', 1, 2, 'B', 'spiritual des', 'C', 'sosial des', 1, 2, 4, 'abcde', 'abcde menghitung', 'abcde prilaku', 'abcde disiplin', 'abcde kerja keras', 'abcde kreatif', 'abcde mendiri', 'abcde rasa', 'abcde tgng jawab', 1535010073, 1535001181, 1535001181, 'draft', '2022-05-09 14:56:10', '2022-05-12 17:48:39', NULL),
+(36, '35', 1, 2, 'SB', 'Aliquip qui adipisic', 'SB', 'Earum est vero face', 1, 1, 1, '     Ad repellendus Occa     ', '     Quidem quasi volupta     ', '     Nulla sit est dolore     ', '     Totam sed expedita l     ', '     Doloremque inventore     ', '     Ducimus at distinct     ', '     Aut a nostrud proide     ', '     Consequat Voluptate     ', '     Dolor quia qui esse     ', NULL, NULL, NULL, 'publish', '2022-05-16 12:20:38', '2022-05-16 17:20:38', NULL),
+(39, '7', 2, 2, NULL, NULL, NULL, NULL, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'draft', NULL, NULL, NULL),
+(42, '7', 2, 5, NULL, NULL, NULL, NULL, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'draft', NULL, NULL, NULL),
+(43, '153501001', NULL, 5, NULL, NULL, NULL, NULL, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'draft', NULL, NULL, NULL),
+(44, '1535010089', 1, 5, 'SB', 'des pred', 'SB', 'des sos', 1, 2, 3, ' memnaca   ', ' menghitung   ', ' prilaku   ', ' disiplin   ', ' kerjakeras   ', ' kreatif   ', ' mandiri   ', ' rasa ingin tau   ', ' tanggung jawab   ', NULL, NULL, NULL, 'publish', '2022-07-09 13:23:30', '2022-07-09 18:23:30', NULL);
 
 -- --------------------------------------------------------
 
@@ -434,7 +453,10 @@ CREATE TABLE `raport_ekstra` (
 
 INSERT INTO `raport_ekstra` (`id`, `raport_id`, `ekstra_id`, `keterangan`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 11, 7, 'esport dengan baik', '2022-05-09 15:00:35', '2022-05-09 15:00:39', NULL),
-(10, 39, 2, NULL, NULL, NULL, NULL);
+(10, 39, 2, NULL, NULL, NULL, NULL),
+(12, 41, 7, NULL, NULL, NULL, NULL),
+(13, 42, 2, NULL, NULL, NULL, NULL),
+(19, 44, 7, ' esport nec ', '2022-07-09 13:23:30', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -462,7 +484,12 @@ INSERT INTO `raport_matpel` (`id`, `raport_id`, `matpel_id`, `nilai`, `predikat`
 (2, 11, 6, '90', 'B', '2022-05-09 15:02:02', NULL, NULL),
 (3, 11, 7, '80', 'B+', '2022-05-09 15:02:26', NULL, NULL),
 (4, 11, 8, '60', 'C', '2022-05-09 15:02:54', NULL, NULL),
-(28, 39, 5, '0', '-', NULL, NULL, NULL);
+(28, 39, 5, '0', '-', NULL, NULL, NULL),
+(33, 42, 5, '0', '-', NULL, NULL, NULL),
+(54, 44, 5, '100', 'A', NULL, NULL, NULL),
+(55, 44, 6, '100', 'A', NULL, NULL, NULL),
+(56, 44, 7, '100', 'A', NULL, NULL, NULL),
+(57, 44, 8, '100', 'A', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -471,7 +498,7 @@ INSERT INTO `raport_matpel` (`id`, `raport_id`, `matpel_id`, `nilai`, `predikat`
 --
 
 CREATE TABLE `siswa` (
-  `id` int(11) NOT NULL,
+  `id` varchar(50) NOT NULL DEFAULT '',
   `nis` varchar(255) NOT NULL,
   `kelas_id` int(11) DEFAULT NULL,
   `nm_siswa` varchar(255) DEFAULT '',
@@ -511,13 +538,13 @@ CREATE TABLE `siswa` (
 --
 
 INSERT INTO `siswa` (`id`, `nis`, `kelas_id`, `nm_siswa`, `tempat_lahir`, `tgl_lahir`, `jenis_kelamin`, `alamat`, `agama`, `status_dalam_keluarga`, `anak_ke`, `tlp`, `sekolah_asal`, `diterima_dikelas`, `diterima_tgl`, `nm_ayah`, `nm_ibu`, `alamat_ortu`, `tlp_ortu`, `pekerjaan_ayah`, `pekerjaan_ibu`, `nm_wali`, `alamat_wali`, `tlp_wali`, `pekerjaan_wali`, `reff_passfoto`, `original_passfoto`, `kelas_sekarang`, `guru_pendamping_sekarang`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, '1', 1, 'ADMIN', NULL, NULL, NULL, NULL, NULL, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'img/superadmin.jpg', NULL, 1, NULL, NULL, NULL, '2022-05-20 02:38:17', '2022-05-20 02:33:19'),
-(7, '7', 2, 'SUWANDI', 'SURABAYA', '2002-01-05', 'L', 'JL. ALAMAT PESERTA DIDIK 24 BLCOK A', 'ISLAM', 'KANDUNG', '1', '0831343837483', 'SDN NEGERI 1', '2', '2022-01-31', 'NAMA AYAH', 'NAMA IBU', 'JL. ALMAT ORTU', '031503433', 'WIRASWASTA', 'IBU RUMAH TANGGA', 'NAMA WALINYA', 'JL. WALI MURID', '031503412', 'SWASTA', 'img/7.jpg', NULL, 2, '1535001181', 1, '2022-04-26 12:05:22', '2022-05-21 18:31:20', NULL),
-(35, '35', 1, 'REZA', 'SURABAYA', '1969-12-31', 'L', 'Ex provident mollit', 'Numquam odit eos nes', 'Amet cumque officia', 'Harum praesentium te', '39', 'Non eiusmod aute non', NULL, '2022-08-01', 'Dignissimos vel qui ', 'Beatae eu ex reicien', 'Neque neque possimus', '81', 'Qui ullam voluptas a', 'Rerum in reprehender', '', '', '', '', 'img/35.jpg', NULL, 1, '0', 1, '2022-04-24 07:56:58', '2022-04-29 16:00:38', NULL),
-(52, '52', 3, 'YUNI', 'MAGETAN', '2022-04-06', 'P', 'Aut deserunt in sed ', 'Quia deleniti volupt', 'Quos nostrud tempora', 'Deleniti dicta culpa', '89', 'Sunt pariatur Mini', NULL, '1970-01-01', 'Laudantium impedit', 'Magna duis sed id d', 'Molestias nulla vel ', '74', 'Dolore vel eligendi ', 'Modi qui non illum ', 'Ducimus fugit veni', 'Deleniti nulla sequi', '85', 'Officiis harum conse', 'img/52.jpg', NULL, 3, '0', 1, '2022-04-26 12:04:31', '2022-04-29 16:00:59', '2022-04-26 12:04:42'),
-(62, '62', 7, 'WONO', 'MOJOKERTO', '1970-01-01', 'P', 'Est non laboris mod', 'Aut consequatur maio', 'Adipisci explicabo ', 'Expedita ipsum iusto', '12', 'Rerum ipsum aperiam ', NULL, '1970-01-01', 'Rerum harum dolorum ', 'Labore quia est fugi', 'A in numquam earum a', '47', 'Suscipit cum molesti', 'Non culpa odio est f', 'Voluptatum impedit ', 'Quis cupidatat ex vo', '67', 'Nostrum quisquam vol', 'img/62.jpg', NULL, 7, '0', 1, '2022-04-28 14:37:28', '2022-04-29 16:00:53', NULL),
-(67, '67', 6, 'KAILA', 'PROBOLINGGO', '2022-04-28', 'L', 'Et iure irure omnis ', 'Ipsa debitis sint n', 'Ex qui perspiciatis', 'Doloremque adipisci ', '1', 'Unde quis iure esse ', NULL, '2022-04-01', 'Sit in modi temporib', 'Natus explicabo Qui', 'Soluta quae sunt acc', '56', 'Veniam aut irure du', 'Exercitationem volup', 'In minima neque non ', 'Quasi laborum Ipsa', '78', 'Culpa qui id moles', 'img/67.jpg', NULL, 6, '0', 1, '2022-04-28 02:18:12', '2022-04-29 16:01:02', NULL),
-(1535010089, '1535010089', 1, 'DIDIT AURYAN IM', 'SIDOARJO', '1997-07-05', 'L', 'Jl. GPA NO 43', 'ISLAM', 'KANDUNG', '1', '0315043433', 'SDN NEGERI 11', '1', '2022-01-01', 'AYAH DIDIT', 'IBU DIDIT', 'JL. GPA NO 25', '0315022222', 'PNS', 'IBU RUMAH TANGGA', '', '', '', '', 'img/1535010089.jpg', NULL, 1, '1535001181', 1, '2022-05-07 00:30:35', '2022-05-07 09:11:04', NULL);
+('1', '1', 1, 'ADMIN', NULL, NULL, NULL, NULL, NULL, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'img/superadmin.jpg', NULL, 1, NULL, NULL, NULL, '2022-05-20 02:38:17', '2022-05-20 02:33:19'),
+('1535010089', '1535010089', 1, 'DIDIT AURYAN IM', 'SIDOARJO', '1997-07-05', 'L', 'Jl. GPA NO 43', 'ISLAM', 'KANDUNG', '1', '0315043433', 'SDN NEGERI 11', '1', '2022-01-01', 'AYAH DIDIT', 'IBU DIDIT', 'JL. GPA NO 25', '0315022222', 'PNS', 'IBU RUMAH TANGGA', '', '', '', '', 'img/1535010089.jpg', NULL, 1, '1535001181', 1, '2022-05-07 00:30:35', '2022-05-07 09:11:04', NULL),
+('35', '35', 1, 'REZA', 'SURABAYA', '1969-12-31', 'L', 'Ex provident mollit', 'Numquam odit eos nes', 'Amet cumque officia', 'Harum praesentium te', '39', 'Non eiusmod aute non', NULL, '2022-08-01', 'Dignissimos vel qui ', 'Beatae eu ex reicien', 'Neque neque possimus', '81', 'Qui ullam voluptas a', 'Rerum in reprehender', '', '', '', '', 'img/35.jpg', NULL, 1, '0', 1, '2022-04-24 07:56:58', '2022-04-29 16:00:38', NULL),
+('52', '52', 3, 'YUNI', 'MAGETAN', '2022-04-06', 'P', 'Aut deserunt in sed ', 'Quia deleniti volupt', 'Quos nostrud tempora', 'Deleniti dicta culpa', '89', 'Sunt pariatur Mini', NULL, '1970-01-01', 'Laudantium impedit', 'Magna duis sed id d', 'Molestias nulla vel ', '74', 'Dolore vel eligendi ', 'Modi qui non illum ', 'Ducimus fugit veni', 'Deleniti nulla sequi', '85', 'Officiis harum conse', 'img/52.jpg', NULL, 3, '0', 1, '2022-04-26 12:04:31', '2022-04-29 16:00:59', '2022-04-26 12:04:42'),
+('62', '62', 7, 'WONO', 'MOJOKERTO', '1970-01-01', 'P', 'Est non laboris mod', 'Aut consequatur maio', 'Adipisci explicabo ', 'Expedita ipsum iusto', '12', 'Rerum ipsum aperiam ', NULL, '1970-01-01', 'Rerum harum dolorum ', 'Labore quia est fugi', 'A in numquam earum a', '47', 'Suscipit cum molesti', 'Non culpa odio est f', 'Voluptatum impedit ', 'Quis cupidatat ex vo', '67', 'Nostrum quisquam vol', 'img/62.jpg', NULL, 7, '0', 1, '2022-04-28 14:37:28', '2022-04-29 16:00:53', NULL),
+('67', '67', 6, 'KAILA', 'PROBOLINGGO', '2022-04-28', 'L', 'Et iure irure omnis ', 'Ipsa debitis sint n', 'Ex qui perspiciatis', 'Doloremque adipisci ', '1', 'Unde quis iure esse ', NULL, '2022-04-01', 'Sit in modi temporib', 'Natus explicabo Qui', 'Soluta quae sunt acc', '56', 'Veniam aut irure du', 'Exercitationem volup', 'In minima neque non ', 'Quasi laborum Ipsa', '78', 'Culpa qui id moles', 'img/67.jpg', NULL, 6, '0', 1, '2022-04-28 02:18:12', '2022-04-29 16:01:02', NULL),
+('7', '7', 2, 'SUWANDI', 'SURABAYA', '2002-01-05', 'L', 'JL. ALAMAT PESERTA DIDIK 24 BLCOK A', 'ISLAM', 'KANDUNG', '1', '0831343837483', 'SDN NEGERI 1', '2', '2022-01-31', 'NAMA AYAH', 'NAMA IBU', 'JL. ALMAT ORTU', '031503433', 'WIRASWASTA', 'IBU RUMAH TANGGA', 'NAMA WALINYA', 'JL. WALI MURID', '031503412', 'SWASTA', 'img/7.jpg', NULL, 2, '1535001181', 1, '2022-04-26 12:05:22', '2022-05-21 18:31:20', NULL);
 
 -- --------------------------------------------------------
 
@@ -556,7 +583,7 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL DEFAULT '',
   `password` varchar(255) NOT NULL DEFAULT '',
-  `siswa_id` int(11) DEFAULT NULL,
+  `siswa_id` varchar(50) DEFAULT NULL,
   `status` int(11) DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
@@ -569,8 +596,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `siswa_id`, `status`, `created_at`, `updated_at`, `deleted_at`, `id_role`) VALUES
-(1, 'admin', 'admin', 1, 1, NULL, NULL, NULL, 1),
-(26, '1535010089', '1535010089', 1535010089, 1, '2022-05-07 00:30:35', '2022-05-07 06:06:14', NULL, 3);
+(1, 'admin', 'admin', '1', 1, NULL, NULL, NULL, 1),
+(26, '1535010089', '1535010089', '1535010089', 1, '2022-05-07 00:30:35', '2022-05-07 06:06:14', NULL, 3),
+(30, '085733502466', '085733502466', '085733502466', 1, '2022-07-09 11:12:20', '2022-07-09 11:12:20', NULL, 2);
 
 --
 -- Indexes for dumped tables
@@ -704,7 +732,7 @@ ALTER TABLE `ekstra`
 -- AUTO_INCREMENT untuk tabel `emosi`
 --
 ALTER TABLE `emosi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=154;
 
 --
 -- AUTO_INCREMENT untuk tabel `jadwal_kelas`
@@ -740,19 +768,19 @@ ALTER TABLE `prestasi`
 -- AUTO_INCREMENT untuk tabel `raport`
 --
 ALTER TABLE `raport`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT untuk tabel `raport_ekstra`
 --
 ALTER TABLE `raport_ekstra`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT untuk tabel `raport_matpel`
 --
 ALTER TABLE `raport_matpel`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT untuk tabel `tahun_ajaran`
@@ -764,7 +792,7 @@ ALTER TABLE `tahun_ajaran`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
