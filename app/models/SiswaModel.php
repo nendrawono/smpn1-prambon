@@ -16,10 +16,11 @@ class SiswaModel
         //             FROM siswa
         //             INNER JOIN kelas ON siswa.kelas_id = kelas.id
         //             WHERE siswa.deleted_at IS NULL';
-        $query = "SELECT S.*, K.nm_kelas, G.nm_guru ,GROUP_CONCAT(DISTINCT P.prestasi SEPARATOR ';') AS prestasi
+        $query = "SELECT S.*, K.nm_kelas, G.nm_guru ,GROUP_CONCAT(DISTINCT P.prestasi SEPARATOR ';') AS prestasi, J.jenis_abk
                     FROM siswa S
                     JOIN kelas K ON S.kelas_sekarang = K.id
                     join guru G on G.id = S.guru_pendamping_sekarang 
+                    JOIN jenis_abk J ON J.id = S.jenis_abk_id
                     left join prestasi P on S.id = P.siswa_id 
                     WHERE S.deleted_at IS null 
                     group by S.id";
@@ -535,6 +536,7 @@ class SiswaModel
         $query = "UPDATE $this->table SET 
                     kelas_id = :kelas_id,
                     nm_siswa = :nm_siswa,
+                    jenis_abk_id = :jenis_abk_id,
                     tempat_lahir = :tempat_lahir,
                     tgl_lahir = :tgl_lahir,
                     jenis_kelamin = :jenis_kelamin,
@@ -566,6 +568,8 @@ class SiswaModel
         $this->db->bind('id', $data['id']);
         $this->db->bind('kelas_id', $data['kelas_id']);
         $this->db->bind('nm_siswa', $data['nm_siswa']);
+        $this->db->bind('jenis_abk_id', $data['jenis_abk_id']);
+        
         $this->db->bind('tempat_lahir', $data['tempat_lahir']);
         $this->db->bind('tgl_lahir', $data['tgl_lahir']);
         $this->db->bind('jenis_kelamin', $data['jenis_kelamin']);

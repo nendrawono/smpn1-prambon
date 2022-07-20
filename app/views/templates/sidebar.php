@@ -90,6 +90,12 @@
                   <p>BAKAT MINAT</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="<?= BASE_URL; ?>/masterjenisabk" class="nav-link <?= ($data['title_page'] == "Data Master Jenis ABK" ? 'active' : '') ?> ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>JENIS ABK</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item">

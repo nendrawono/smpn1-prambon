@@ -16,6 +16,7 @@
             <th>NIS</th>
             <th>Nama</th>
             <th>Kelas</th>
+            <th>Jenis ABK</th>
             <th>Prestasi</th>
             <th>Guru Pendamping</th>
             <th>Aksi</th>
@@ -28,6 +29,7 @@
                   <td><?= $o['id']; ?></td>
                   <td><?= $o['nm_siswa']; ?></td>
                   <td><?= $o['nm_kelas']; ?></td>
+                  <td><?= $o['jenis_abk']; ?></td>
                   <td><?php
                       $arrPrestasi = array();
                       $arrPrestasi = explode(";",$o['prestasi']);

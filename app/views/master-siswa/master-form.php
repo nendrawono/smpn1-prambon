@@ -86,6 +86,15 @@
             </div>
 
             <div class="form-group">
+              <label>Jenis ABK</label>
+              <select class="form-control select2" id="jenis_abk_id" name="jenis_abk_id" style="width: 100%;">
+                <?php foreach ($data['select2_jenis'] as $o) : ?>
+                  <option value="<?= $o['id']; ?>"><?= $o['jenis_abk']; ?></option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+
+            <div class="form-group">
               <label>Agama</label>
               <input type="text" class="form-control" name="agama" id="agama" placeholder="Agama" required>
               <div class="invalid-feedback">

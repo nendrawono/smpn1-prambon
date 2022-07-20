@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 09 Jul 2022 pada 20.48
+-- Waktu pembuatan: 20 Jul 2022 pada 18.18
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 7.4.29
 
@@ -240,6 +240,40 @@ INSERT INTO `jadwal_kelas` (`id`, `hari`, `jam_ke`, `jam_mulai`, `jam_selesai`, 
 (15, 'senin', '3', '12:00', '15:00', 1, '1535001181', 7, '2022-04-26 12:00:17', '2022-04-26 12:00:17', NULL),
 (16, 'rabu', '1', '07:00', '11:00', 1, '1535001181', 8, '2022-04-26 12:01:02', '2022-04-26 12:01:02', NULL),
 (17, 'senin', '1', '07:00', '08:00', 2, '1535001181', 5, '2022-04-29 04:25:52', '2022-04-29 04:25:52', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `jenis_abk`
+--
+
+CREATE TABLE `jenis_abk` (
+  `id` int(11) NOT NULL,
+  `jenis_abk` varchar(50) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `jenis_abk`
+--
+
+INSERT INTO `jenis_abk` (`id`, `jenis_abk`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Tunanetra', '2022-07-20 15:26:14', '2022-07-20 15:26:16', NULL),
+(2, 'Tunarungu', '2022-07-20 15:26:31', '2022-07-20 15:26:32', NULL),
+(3, 'Tunagrahita', '2022-07-20 15:27:02', '2022-07-20 15:27:02', NULL),
+(4, 'Tunadaksa', '2022-07-20 15:27:20', '2022-07-20 15:27:20', NULL),
+(5, 'Tunalaras', '2022-07-20 15:28:48', '2022-07-20 15:28:49', NULL),
+(6, 'Gangguan pemusatan perhatian dan hiperaktivitas (A', '2023-07-20 15:28:44', '2022-07-20 15:28:50', NULL),
+(7, 'Autisme', '2022-07-20 15:28:55', '2022-07-20 15:28:56', NULL),
+(8, 'Gangguan ganda', '2022-07-20 15:29:20', '2022-07-20 15:29:21', NULL),
+(9, 'Lamban belajar', '2021-07-20 15:29:32', '2022-07-20 15:29:33', NULL),
+(10, 'Kesulitan belajar khusus', '2022-07-20 15:30:21', '2022-07-20 15:30:22', NULL),
+(11, 'Gangguan kemampuan komunikasi', '2022-07-20 15:29:34', '2022-07-20 15:30:35', NULL),
+(12, 'Gifted', '2022-07-20 15:30:56', '2022-07-20 15:30:57', NULL),
+(13, '-', '2022-07-20 15:31:34', '2022-07-20 15:31:35', NULL),
+(14, 'al', '2022-07-20 11:01:06', '2022-07-20 11:01:13', '2022-07-20 11:01:54');
 
 -- --------------------------------------------------------
 
@@ -501,6 +535,7 @@ CREATE TABLE `siswa` (
   `id` varchar(50) NOT NULL DEFAULT '',
   `nis` varchar(255) NOT NULL,
   `kelas_id` int(11) DEFAULT NULL,
+  `jenis_abk_id` int(11) DEFAULT NULL,
   `nm_siswa` varchar(255) DEFAULT '',
   `tempat_lahir` varchar(255) DEFAULT NULL,
   `tgl_lahir` date DEFAULT NULL,
@@ -537,14 +572,14 @@ CREATE TABLE `siswa` (
 -- Dumping data untuk tabel `siswa`
 --
 
-INSERT INTO `siswa` (`id`, `nis`, `kelas_id`, `nm_siswa`, `tempat_lahir`, `tgl_lahir`, `jenis_kelamin`, `alamat`, `agama`, `status_dalam_keluarga`, `anak_ke`, `tlp`, `sekolah_asal`, `diterima_dikelas`, `diterima_tgl`, `nm_ayah`, `nm_ibu`, `alamat_ortu`, `tlp_ortu`, `pekerjaan_ayah`, `pekerjaan_ibu`, `nm_wali`, `alamat_wali`, `tlp_wali`, `pekerjaan_wali`, `reff_passfoto`, `original_passfoto`, `kelas_sekarang`, `guru_pendamping_sekarang`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-('1', '1', 1, 'ADMIN', NULL, NULL, NULL, NULL, NULL, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'img/superadmin.jpg', NULL, 1, NULL, NULL, NULL, '2022-05-20 02:38:17', '2022-05-20 02:33:19'),
-('1535010089', '1535010089', 1, 'DIDIT AURYAN IM', 'SIDOARJO', '1997-07-05', 'L', 'Jl. GPA NO 43', 'ISLAM', 'KANDUNG', '1', '0315043433', 'SDN NEGERI 11', '1', '2022-01-01', 'AYAH DIDIT', 'IBU DIDIT', 'JL. GPA NO 25', '0315022222', 'PNS', 'IBU RUMAH TANGGA', '', '', '', '', 'img/1535010089.jpg', NULL, 1, '1535001181', 1, '2022-05-07 00:30:35', '2022-05-07 09:11:04', NULL),
-('35', '35', 1, 'REZA', 'SURABAYA', '1969-12-31', 'L', 'Ex provident mollit', 'Numquam odit eos nes', 'Amet cumque officia', 'Harum praesentium te', '39', 'Non eiusmod aute non', NULL, '2022-08-01', 'Dignissimos vel qui ', 'Beatae eu ex reicien', 'Neque neque possimus', '81', 'Qui ullam voluptas a', 'Rerum in reprehender', '', '', '', '', 'img/35.jpg', NULL, 1, '0', 1, '2022-04-24 07:56:58', '2022-04-29 16:00:38', NULL),
-('52', '52', 3, 'YUNI', 'MAGETAN', '2022-04-06', 'P', 'Aut deserunt in sed ', 'Quia deleniti volupt', 'Quos nostrud tempora', 'Deleniti dicta culpa', '89', 'Sunt pariatur Mini', NULL, '1970-01-01', 'Laudantium impedit', 'Magna duis sed id d', 'Molestias nulla vel ', '74', 'Dolore vel eligendi ', 'Modi qui non illum ', 'Ducimus fugit veni', 'Deleniti nulla sequi', '85', 'Officiis harum conse', 'img/52.jpg', NULL, 3, '0', 1, '2022-04-26 12:04:31', '2022-04-29 16:00:59', '2022-04-26 12:04:42'),
-('62', '62', 7, 'WONO', 'MOJOKERTO', '1970-01-01', 'P', 'Est non laboris mod', 'Aut consequatur maio', 'Adipisci explicabo ', 'Expedita ipsum iusto', '12', 'Rerum ipsum aperiam ', NULL, '1970-01-01', 'Rerum harum dolorum ', 'Labore quia est fugi', 'A in numquam earum a', '47', 'Suscipit cum molesti', 'Non culpa odio est f', 'Voluptatum impedit ', 'Quis cupidatat ex vo', '67', 'Nostrum quisquam vol', 'img/62.jpg', NULL, 7, '0', 1, '2022-04-28 14:37:28', '2022-04-29 16:00:53', NULL),
-('67', '67', 6, 'KAILA', 'PROBOLINGGO', '2022-04-28', 'L', 'Et iure irure omnis ', 'Ipsa debitis sint n', 'Ex qui perspiciatis', 'Doloremque adipisci ', '1', 'Unde quis iure esse ', NULL, '2022-04-01', 'Sit in modi temporib', 'Natus explicabo Qui', 'Soluta quae sunt acc', '56', 'Veniam aut irure du', 'Exercitationem volup', 'In minima neque non ', 'Quasi laborum Ipsa', '78', 'Culpa qui id moles', 'img/67.jpg', NULL, 6, '0', 1, '2022-04-28 02:18:12', '2022-04-29 16:01:02', NULL),
-('7', '7', 2, 'SUWANDI', 'SURABAYA', '2002-01-05', 'L', 'JL. ALAMAT PESERTA DIDIK 24 BLCOK A', 'ISLAM', 'KANDUNG', '1', '0831343837483', 'SDN NEGERI 1', '2', '2022-01-31', 'NAMA AYAH', 'NAMA IBU', 'JL. ALMAT ORTU', '031503433', 'WIRASWASTA', 'IBU RUMAH TANGGA', 'NAMA WALINYA', 'JL. WALI MURID', '031503412', 'SWASTA', 'img/7.jpg', NULL, 2, '1535001181', 1, '2022-04-26 12:05:22', '2022-05-21 18:31:20', NULL);
+INSERT INTO `siswa` (`id`, `nis`, `kelas_id`, `jenis_abk_id`, `nm_siswa`, `tempat_lahir`, `tgl_lahir`, `jenis_kelamin`, `alamat`, `agama`, `status_dalam_keluarga`, `anak_ke`, `tlp`, `sekolah_asal`, `diterima_dikelas`, `diterima_tgl`, `nm_ayah`, `nm_ibu`, `alamat_ortu`, `tlp_ortu`, `pekerjaan_ayah`, `pekerjaan_ibu`, `nm_wali`, `alamat_wali`, `tlp_wali`, `pekerjaan_wali`, `reff_passfoto`, `original_passfoto`, `kelas_sekarang`, `guru_pendamping_sekarang`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+('1', '1', 1, 13, 'ADMIN', NULL, NULL, NULL, NULL, NULL, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'img/superadmin.jpg', NULL, 1, NULL, NULL, NULL, '2022-07-20 15:32:54', '2022-05-20 02:33:19'),
+('1535010089', '1535010089', 1, 7, 'DIDIT AURYAN IM', 'SIDOARJO', '1997-04-05', 'L', 'Jl. GPA NO 43', 'ISLAM', 'KANDUNG', '1', '0315043433', 'SDN NEGERI 11', '1', '1969-12-31', 'AYAH DIDIT', 'IBU DIDIT', 'JL. GPA NO 25', '0315022222', 'PNS', 'IBU RUMAH TANGGA', '', '', '', '', 'img/1535010089.jpg', NULL, 1, '1535001181', 1, '2022-05-07 00:30:35', '2022-07-20 11:17:13', NULL),
+('35', '35', 1, 13, 'REZA', 'SURABAYA', '1969-12-31', 'L', 'Ex provident mollit', 'Numquam odit eos nes', 'Amet cumque officia', 'Harum praesentium te', '39', 'Non eiusmod aute non', NULL, '2022-08-01', 'Dignissimos vel qui ', 'Beatae eu ex reicien', 'Neque neque possimus', '81', 'Qui ullam voluptas a', 'Rerum in reprehender', '', '', '', '', 'img/35.jpg', NULL, 1, '0', 1, '2022-04-24 07:56:58', '2022-07-20 15:32:54', NULL),
+('52', '52', 3, 13, 'YUNI', 'MAGETAN', '2022-04-06', 'P', 'Aut deserunt in sed ', 'Quia deleniti volupt', 'Quos nostrud tempora', 'Deleniti dicta culpa', '89', 'Sunt pariatur Mini', NULL, '1970-01-01', 'Laudantium impedit', 'Magna duis sed id d', 'Molestias nulla vel ', '74', 'Dolore vel eligendi ', 'Modi qui non illum ', 'Ducimus fugit veni', 'Deleniti nulla sequi', '85', 'Officiis harum conse', 'img/52.jpg', NULL, 3, '0', 1, '2022-04-26 12:04:31', '2022-07-20 15:32:54', '2022-04-26 12:04:42'),
+('62', '62', 7, 13, 'WONO', 'MOJOKERTO', '1970-01-01', 'P', 'Est non laboris mod', 'Aut consequatur maio', 'Adipisci explicabo ', 'Expedita ipsum iusto', '12', 'Rerum ipsum aperiam ', NULL, '1970-01-01', 'Rerum harum dolorum ', 'Labore quia est fugi', 'A in numquam earum a', '47', 'Suscipit cum molesti', 'Non culpa odio est f', 'Voluptatum impedit ', 'Quis cupidatat ex vo', '67', 'Nostrum quisquam vol', 'img/62.jpg', NULL, 7, '0', 1, '2022-04-28 14:37:28', '2022-07-20 15:32:54', NULL),
+('67', '67', 6, 13, 'KAILA', 'PROBOLINGGO', '2022-04-28', 'L', 'Et iure irure omnis ', 'Ipsa debitis sint n', 'Ex qui perspiciatis', 'Doloremque adipisci ', '1', 'Unde quis iure esse ', NULL, '2022-04-01', 'Sit in modi temporib', 'Natus explicabo Qui', 'Soluta quae sunt acc', '56', 'Veniam aut irure du', 'Exercitationem volup', 'In minima neque non ', 'Quasi laborum Ipsa', '78', 'Culpa qui id moles', 'img/67.jpg', NULL, 6, '0', 1, '2022-04-28 02:18:12', '2022-07-20 15:32:54', NULL),
+('7', '7', 2, 13, 'SUWANDI', 'SURABAYA', '2002-01-05', 'L', 'JL. ALAMAT PESERTA DIDIK 24 BLCOK A', 'ISLAM', 'KANDUNG', '1', '0831343837483', 'SDN NEGERI 1', '2', '2022-01-31', 'NAMA AYAH', 'NAMA IBU', 'JL. ALMAT ORTU', '031503433', 'WIRASWASTA', 'IBU RUMAH TANGGA', 'NAMA WALINYA', 'JL. WALI MURID', '031503412', 'SWASTA', 'img/7.jpg', NULL, 2, '1535001181', 1, '2022-04-26 12:05:22', '2022-07-20 15:32:54', NULL);
 
 -- --------------------------------------------------------
 
@@ -638,6 +673,12 @@ ALTER TABLE `jabatan`
 -- Indeks untuk tabel `jadwal_kelas`
 --
 ALTER TABLE `jadwal_kelas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `jenis_abk`
+--
+ALTER TABLE `jenis_abk`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -739,6 +780,12 @@ ALTER TABLE `emosi`
 --
 ALTER TABLE `jadwal_kelas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT untuk tabel `jenis_abk`
+--
+ALTER TABLE `jenis_abk`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT untuk tabel `kelas`

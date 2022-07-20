@@ -121,6 +121,7 @@ const MasterSiswa = function () {
           $("#nm_siswa").val(data.nm_siswa);
           $("#nis").val(data.nis);
           $("#tempat_lahir").val(data.tempat_lahir);
+          $("#jenis_abk_id").val(data.jenis_abk_id);
 
           var tgl_lahir = dateViewFormat(data.tgl_lahir);
           $("#tgl_lahir").val(tgl_lahir);

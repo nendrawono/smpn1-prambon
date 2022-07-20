@@ -9,7 +9,8 @@ class MasterSiswa extends Controller
             'title_page' => 'Data Master Siswa',
             'siswa' => $this->model('SiswaModel')->getAllSiswa(),
             'select2_kelas' => $this->model('SiswaModel')->getAllKelas(),
-            'select2_guru' => $this->model('SiswaModel')->getAllGuru()
+            'select2_guru' => $this->model('SiswaModel')->getAllGuru(),
+            'select2_jenis' => $this->model('JenisAbkModel')->getAllJenisAbk(),
         ];
 
         // print_r($data);
@@ -27,10 +28,7 @@ class MasterSiswa extends Controller
 
 
         $check_raport_exist  = $this->model('SiswaModel')->checkRaportSiswa($nis, $tahun_ajaran);
-        $siswa = $this->model('SiswaModel')->getRaportSiswaByID($nis);
-
-
-        
+        $siswa = $this->model('SiswaModel')->getRaportSiswaByID($nis);        
 
         if($check_raport_exist){
             // var_dump($check_raport_exist['id']);
